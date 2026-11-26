@@ -1,0 +1,55 @@
+name: Full Windows validation
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/**', 'scripts/**', 'src/**', 'fixtures/**', '*.mjs', 'moon.*', '*lock.json', 'run-*.ps1']
+  pull_request:
+    paths: ['.github/workflows/**', 'scripts/**', 'src/**', 'fixtures/**', '*.mjs', 'moon.*', '*lock.json', 'run-*.ps1']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  full-validation:
+    runs-on: windows-2025
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Fresh checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Bootstrap checksum-pinned tools on D
+        run: ./scripts/bootstrap-ci.ps1
+      - name: Prepare exact parser, dependencies and reference tool
+        run: ./scripts/prepare.ps1 -Toolchain $env:WITPROBE_MOON_HOME
+      - name: Fetch original commit-pinned WASI sources
+        run: python -B scripts/fetch-real-corpus.py "$env:GITHUB_WORKSPACE\work\ci-corpus"
+      - name: Run complete validation including real projects and mutations
+        run: ./run-validation.ps1 -RealCorpusPath "$env:GITHUB_WORKSPACE\work\ci-corpus\corpus"
+      - name: Run demonstration and real local gate
+        run: ./scripts/demo.ps1
+      - name: Require all validation stages and an unchanged checkout
+        run: ./scripts/verify-ci.ps1
+      - name: Preserve verification evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: verification-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            evidence/
+            work/ci-toolchain.json
+            !evidence/**/_build/**
+            !evidence/**/.mooncakes/**
+            !evidence/**/cache/**
+            !evidence/**/tmp/**
