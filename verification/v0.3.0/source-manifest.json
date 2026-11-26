@@ -1,0 +1,487 @@
+[
+  {
+    "label": "wasi-cli-v0.2.0",
+    "repository": "https://github.com/WebAssembly/wasi-cli",
+    "commit": "6ae82617096e83e6606047736e84ac397b788631",
+    "url": "https://codeload.github.com/WebAssembly/wasi-cli/zip/6ae82617096e83e6606047736e84ac397b788631",
+    "archive_sha256": "5c5e4397e0586b9532454cdb94826e2a34b9873ebe8a42b60cf29f8c722cd28d",
+    "archive_bytes": 98239,
+    "files": [
+      {
+        "path": ".github/workflows/main.yml",
+        "bytes": 635,
+        "sha256": "d48e3bfb77388aa8fd4a9b7b90c1d6c68936a8b567ee4951b105466c56b4c246"
+      },
+      {
+        "path": "README.md",
+        "bytes": 4423,
+        "sha256": "035712752e341062facc68157a9f7f6d00eb35b60a880de288dc0076956405c2"
+      },
+      {
+        "path": "command.md",
+        "bytes": 176851,
+        "sha256": "28bd76f399d52ad1a404463ca3192681730a6aa6a0c7ebdfff88ee1041232fd1"
+      },
+      {
+        "path": "imports.md",
+        "bytes": 176487,
+        "sha256": "da9c33e414b3b2ac0df4524011a9aba0caf7bdc8067950b2a0993691e5fea385"
+      },
+      {
+        "path": "test/README.md",
+        "bytes": 149,
+        "sha256": "726d52f7d3e74e7674a4dd7c9a757752f2b90cc4b4f61b8ea1195e503973b216"
+      },
+      {
+        "path": "wit/command.wit",
+        "bytes": 77,
+        "sha256": "da467a3a1b7a1bf6d9ec10b5bc5cbb90ddbc912b34495e19c1d5fe6c5b130349"
+      },
+      {
+        "path": "wit/deps.lock",
+        "bytes": 1486,
+        "sha256": "21887c3c175d9bae932e42a61b276fced7da55e08c5e6f1ddee8a0d36afb0bf2"
+      },
+      {
+        "path": "wit/deps.toml",
+        "bytes": 372,
+        "sha256": "2ceaed6e4857f5985a22aa6d4eed8580bc45745b6836173861c568a501277ef3"
+      },
+      {
+        "path": "wit/deps/clocks/monotonic-clock.wit",
+        "bytes": 1525,
+        "sha256": "2e974279ccee050c5ea32117f83cff50d1b3146763db2a60c3e8afeb774dad47"
+      },
+      {
+        "path": "wit/deps/clocks/wall-clock.wit",
+        "bytes": 1674,
+        "sha256": "55b7978bad3fcf9b0886be4644834e8bf9e3553bba018d8fd9201482369cb6b8"
+      },
+      {
+        "path": "wit/deps/clocks/world.wit",
+        "bytes": 97,
+        "sha256": "015589355de95f274258599abf01290405b316d806bf2d97df0609077d970edf"
+      },
+      {
+        "path": "wit/deps/filesystem/preopens.wit",
+        "bytes": 213,
+        "sha256": "872e66229d4d44c0ac97751720f396729c9464f1b628fc6bda3ed2079a82e6f1"
+      },
+      {
+        "path": "wit/deps/filesystem/types.wit",
+        "bytes": 27621,
+        "sha256": "f26dadcbcc7b231893c5f0094b729eabeb0643dca182697433fa8ab6ab786d20"
+      },
+      {
+        "path": "wit/deps/filesystem/world.wit",
+        "bytes": 89,
+        "sha256": "9e1ffb6f850441124c4fe07bcede8cb3c4b6186f1dc020cb9189020b8a853c2b"
+      },
+      {
+        "path": "wit/deps/io/error.wit",
+        "bytes": 1444,
+        "sha256": "5c0cb7d20bca9d98233f13076132081e5aa12bc825a823066ff27d4cea834a0c"
+      },
+      {
+        "path": "wit/deps/io/poll.wit",
+        "bytes": 1590,
+        "sha256": "88e2b5c3f04e6f59a93136823403389f1df37f92df7fc32ebcc36af8b1b78bfe"
+      },
+      {
+        "path": "wit/deps/io/streams.wit",
+        "bytes": 12096,
+        "sha256": "41204f72fd3568897f9f217fc4840cd8ccf117bd53cc4f53ea6eacc7712bf76f"
+      },
+      {
+        "path": "wit/deps/io/world.wit",
+        "bytes": 79,
+        "sha256": "358617cc366d0c4528571fc983acb9431a4516b7c8582d93930b54c80125bc1a"
+      },
+      {
+        "path": "wit/deps/random/insecure-seed.wit",
+        "bytes": 1104,
+        "sha256": "9ebba944fef13d4db4a124519349ebf03febaff40f78f818d2c77c926281eb12"
+      },
+      {
+        "path": "wit/deps/random/insecure.wit",
+        "bytes": 863,
+        "sha256": "28880bdfebda2f39f36f5fe5a1d20f6f1e76f1793ff6e973e34ff8cb4cdc633d"
+      },
+      {
+        "path": "wit/deps/random/random.wit",
+        "bytes": 1149,
+        "sha256": "b36eb876e39d3a0d63d6ca0c6fc4e84278ddc22c48173906645ed3dae3ef0c79"
+      },
+      {
+        "path": "wit/deps/random/world.wit",
+        "bytes": 112,
+        "sha256": "7db07eadfefe2d2f042b5b7a283d5c5b8ab2a25276c352cfcc6cc9fd1a7b5fc7"
+      },
+      {
+        "path": "wit/deps/sockets/instance-network.wit",
+        "bytes": 222,
+        "sha256": "ad100127c74b967064cf5d8e1770f6f0d787ef55f07ba9f6b334bc4c98c82282"
+      },
+      {
+        "path": "wit/deps/sockets/ip-name-lookup.wit",
+        "bytes": 2603,
+        "sha256": "fdfd3f54f7b82457c3b08b7c941c0a50a1fc15cdf23d692ccc5680eeb29313cd"
+      },
+      {
+        "path": "wit/deps/sockets/network.wit",
+        "bytes": 4175,
+        "sha256": "db6583f0e2425abbb7621a26716371983e9753ec1c44c580a888a603e74a8840"
+      },
+      {
+        "path": "wit/deps/sockets/tcp-create-socket.wit",
+        "bytes": 1487,
+        "sha256": "6a9175598eb628ee8a14989efa0ef4e3244aae1d339f1c882467c5c8226e02ef"
+      },
+      {
+        "path": "wit/deps/sockets/tcp.wit",
+        "bytes": 20199,
+        "sha256": "aa7a316ce0cfb8b42c0f592b5096d218da8ad75e7878f06329954e22040c3ee5"
+      },
+      {
+        "path": "wit/deps/sockets/udp-create-socket.wit",
+        "bytes": 1477,
+        "sha256": "058da3ade225a22ae9f7329453a51cf55174f3253b7a4163d10bc46bc7c53b85"
+      },
+      {
+        "path": "wit/deps/sockets/udp.wit",
+        "bytes": 15189,
+        "sha256": "411998b320d08fce10400c840f0ca0ebef49c5a4fb13f94011bbce2bbd5972fc"
+      },
+      {
+        "path": "wit/deps/sockets/world.wit",
+        "bytes": 215,
+        "sha256": "9281c12b9611117e98674eb3f00bd9c4eb2e49f1386f0d6173b9c88181180d12"
+      },
+      {
+        "path": "wit/environment.wit",
+        "bytes": 709,
+        "sha256": "8d4f13e628d2e8f029f6d668d8075db5e6c8867238c0436cc966dd9a535148e1"
+      },
+      {
+        "path": "wit/exit.wit",
+        "bytes": 107,
+        "sha256": "337522eb41c89e660b1dabc1bae362acc462f9cbfdcb9546e790e371580175a2"
+      },
+      {
+        "path": "wit/imports.wit",
+        "bytes": 445,
+        "sha256": "8cb6df9f4860399cac4640df6e9cb5eeea35ce70920a2f3fb631911311870bc0"
+      },
+      {
+        "path": "wit/run.wit",
+        "bytes": 66,
+        "sha256": "50815a16aaebae4b99d2e2f9de69ddf30fc27249f41ad3cf477c4e796edf5792"
+      },
+      {
+        "path": "wit/stdio.wit",
+        "bytes": 316,
+        "sha256": "6311ad8251ff4e0452c5be30ee70d9d6c41971c31e566dc1029d653182cd69fe"
+      },
+      {
+        "path": "wit/terminal.wit",
+        "bytes": 1677,
+        "sha256": "57b139fed58792c8dcac6cd74caf4baadda64f49b53181a999b5d6080694925c"
+      }
+    ]
+  },
+  {
+    "label": "wasi-cli-v0.2.1",
+    "repository": "https://github.com/WebAssembly/wasi-cli",
+    "commit": "0598519dac2e46db4f3671bcb90f284919ea6e0e",
+    "url": "https://codeload.github.com/WebAssembly/wasi-cli/zip/0598519dac2e46db4f3671bcb90f284919ea6e0e",
+    "archive_sha256": "070ae9ecd724fb836f3bc58294c526b8ff67d07f08b716cd8e5677e1dbae02be",
+    "archive_bytes": 101272,
+    "files": [
+      {
+        "path": ".github/workflows/main.yml",
+        "bytes": 674,
+        "sha256": "f69a918d8cb2e8c50ab2ba7363af81d90ac818379deb118abbdbd30cf7770881"
+      },
+      {
+        "path": "README.md",
+        "bytes": 4423,
+        "sha256": "035712752e341062facc68157a9f7f6d00eb35b60a880de288dc0076956405c2"
+      },
+      {
+        "path": "command.md",
+        "bytes": 177647,
+        "sha256": "b236794a9423b7560946fc81e9ff9b2239b5449d913f45a227bfc45525f0ff9c"
+      },
+      {
+        "path": "imports.md",
+        "bytes": 177283,
+        "sha256": "0b8250ad42165a4f463735810dba01e774a5f22f526d60e1614b2eb43eef3e82"
+      },
+      {
+        "path": "test/README.md",
+        "bytes": 149,
+        "sha256": "726d52f7d3e74e7674a4dd7c9a757752f2b90cc4b4f61b8ea1195e503973b216"
+      },
+      {
+        "path": "wit/command.wit",
+        "bytes": 153,
+        "sha256": "dfca63b7f6475359226c32306b965026d9ae798ad9fac4bed19005f956b24c64"
+      },
+      {
+        "path": "wit/deps.lock",
+        "bytes": 1486,
+        "sha256": "a88326cf9d08e8f4de409c7afab0166d95d5bdac49d32ed12dedff54a7e2d857"
+      },
+      {
+        "path": "wit/deps.toml",
+        "bytes": 372,
+        "sha256": "2ceaed6e4857f5985a22aa6d4eed8580bc45745b6836173861c568a501277ef3"
+      },
+      {
+        "path": "wit/deps/clocks/monotonic-clock.wit",
+        "bytes": 1669,
+        "sha256": "b19f3b2f58fdcf624134503b85fb91dd57c9db1e85795d9b96b953af07b59c08"
+      },
+      {
+        "path": "wit/deps/clocks/timezone.wit",
+        "bytes": 2219,
+        "sha256": "4c7c167ae3e87ac9fc68b606d54ac01312808f44c5a1037e96320da3b18bcbf5"
+      },
+      {
+        "path": "wit/deps/clocks/wall-clock.wit",
+        "bytes": 1782,
+        "sha256": "430c3cfcceeceaf9af5c39d6ce389dd383baec7f2e7a8f55a97804d80adc6581"
+      },
+      {
+        "path": "wit/deps/clocks/world.wit",
+        "bytes": 239,
+        "sha256": "583e1734be8c655aabfeb05467535b91e41865b5ccedfdd043ff9066aa995d9f"
+      },
+      {
+        "path": "wit/deps/filesystem/preopens.wit",
+        "bytes": 293,
+        "sha256": "fe0e5c3a13bffdafa10f7d1330b3e2216b9e28ce668b013371344530d86a7a68"
+      },
+      {
+        "path": "wit/deps/filesystem/types.wit",
+        "bytes": 28961,
+        "sha256": "d2f3ffc45f9032300fea8b2bab50ed10d54a4a29dbf0edc3fc5f4ecd8657600d"
+      },
+      {
+        "path": "wit/deps/filesystem/world.wit",
+        "bytes": 169,
+        "sha256": "726fcca86513609ac4e2c7ab8219b17f1645fd482f6a162ef42c8dabe9001d64"
+      },
+      {
+        "path": "wit/deps/io/error.wit",
+        "bytes": 1506,
+        "sha256": "959419de6df0b1cb560b9035b24dae480cd51ecfd697a741ee0d3e92b2128937"
+      },
+      {
+        "path": "wit/deps/io/poll.wit",
+        "bytes": 1771,
+        "sha256": "c3c47c0bcadecc25a5d0368c2706eb9a741beef51f6a0abdefe7654081268f8f"
+      },
+      {
+        "path": "wit/deps/io/streams.wit",
+        "bytes": 12916,
+        "sha256": "0a85bb1f52a9cbcb8436675a602a525c793eabbc08c1b3497719726b1aa02491"
+      },
+      {
+        "path": "wit/deps/io/world.wit",
+        "bytes": 160,
+        "sha256": "057b897564d9e66f6bdf19589d88dacb701426888a2b47ffa15cfaba5684be9e"
+      },
+      {
+        "path": "wit/deps/random/insecure-seed.wit",
+        "bytes": 1156,
+        "sha256": "43cfc8aa6cd4bffb3774b7b4c9d8ec98d33fc65dcd68adde3a3ecb0a186fa63f"
+      },
+      {
+        "path": "wit/deps/random/insecure.wit",
+        "bytes": 943,
+        "sha256": "394b052cb2925122a8567be8ed318c793c344651107cb0cb6963dda2ecd3bdae"
+      },
+      {
+        "path": "wit/deps/random/random.wit",
+        "bytes": 1229,
+        "sha256": "c6234982f2dc66570efb071bf67d99d69dfd9fb0d53defbc463a02dd58b2c164"
+      },
+      {
+        "path": "wit/deps/random/world.wit",
+        "bytes": 222,
+        "sha256": "6942eb630baa36dab2011a3966e553b10ee168023ac11e31a630798b6dbea064"
+      },
+      {
+        "path": "wit/deps/sockets/instance-network.wit",
+        "bytes": 301,
+        "sha256": "1e4a5d97df44421503a169e1d514eca2cf160f545c44d320ce8a82f726a40cf8"
+      },
+      {
+        "path": "wit/deps/sockets/ip-name-lookup.wit",
+        "bytes": 2801,
+        "sha256": "92a90ea36b2f976fcaaf33782e90a1f030c229f54933bc76c32fe2ee61c57309"
+      },
+      {
+        "path": "wit/deps/sockets/network.wit",
+        "bytes": 4449,
+        "sha256": "727674008048a99e3140cec7d770f737afd45357fdb2f299e2eec1fed0fc2500"
+      },
+      {
+        "path": "wit/deps/sockets/tcp-create-socket.wit",
+        "bytes": 1594,
+        "sha256": "96a6a1a93b859127ee60273f0a77cda8d60930f7952174fb22469293b5da6a3a"
+      },
+      {
+        "path": "wit/deps/sockets/tcp.wit",
+        "bytes": 21299,
+        "sha256": "b25c1bee23fe329c71074c30a54c361a29ed6569df1902529f6b45125fcdf71f"
+      },
+      {
+        "path": "wit/deps/sockets/udp-create-socket.wit",
+        "bytes": 1584,
+        "sha256": "c52b9bf91ef4e30e7ec08ad1fc9e77ef005a0a87648c5d2e416dd6e35369f08c"
+      },
+      {
+        "path": "wit/deps/sockets/udp.wit",
+        "bytes": 15950,
+        "sha256": "d5cd0908c44d01114b739dcf1ae1f957076c1c2ac8300f533127d55db29d2a69"
+      },
+      {
+        "path": "wit/deps/sockets/world.wit",
+        "bytes": 435,
+        "sha256": "223971d129337446ff8f3262ac9631793744de94b4a69051c304e07470192ca7"
+      },
+      {
+        "path": "wit/environment.wit",
+        "bytes": 811,
+        "sha256": "5e58cd47b162e9f004bc9224a29c2ec3cf9e1a3d4c910154ce53742f828af91f"
+      },
+      {
+        "path": "wit/exit.wit",
+        "bytes": 653,
+        "sha256": "a0fae6014751dc95f45b1dbe530b7f4db99d5bd607ed8bbf879b22a906f4514c"
+      },
+      {
+        "path": "wit/imports.wit",
+        "bytes": 859,
+        "sha256": "9a01d0c16a4e41dc9a695f5d9d88825e30275bab29d0a607fa8f67368c10c82e"
+      },
+      {
+        "path": "wit/run.wit",
+        "bytes": 116,
+        "sha256": "a7df5376da8230e0509fffbb8355641af0765cc5cff8064bbe58fef1cbbe63c1"
+      },
+      {
+        "path": "wit/stdio.wit",
+        "bytes": 544,
+        "sha256": "6deff0b560eeaf9c55a5257e9a0747bf4cf6c67e47950a7a5c58ce9efb28a497"
+      },
+      {
+        "path": "wit/terminal.wit",
+        "bytes": 2021,
+        "sha256": "fc87cd0bc3f76ff7181d3666617a38ee10239f8e0344db2a52cb79f46c6b2d31"
+      }
+    ]
+  },
+  {
+    "label": "wasi-random-v0.2.0",
+    "repository": "https://github.com/WebAssembly/wasi-random",
+    "commit": "10ba8d44f22a1dd605c937f687013c90b5fec942",
+    "url": "https://codeload.github.com/WebAssembly/wasi-random/zip/10ba8d44f22a1dd605c937f687013c90b5fec942",
+    "archive_sha256": "26702a5bd31e198b5a735e3dc796cc9f4790e725f8386c88193456b42f35c1ad",
+    "archive_bytes": 9133,
+    "files": [
+      {
+        "path": ".github/workflows/main.yml",
+        "bytes": 262,
+        "sha256": "eb1da61b341460cdc1cf133a4beb34f946ca4fd1ea9f2cf42ae2ace6dc233705"
+      },
+      {
+        "path": "README.md",
+        "bytes": 7209,
+        "sha256": "998d7f9f1b900d850f1b5ab4dd5149797b9412cd9b692ed05e0a8a4013b35e3a"
+      },
+      {
+        "path": "imports.md",
+        "bytes": 4534,
+        "sha256": "61b46d5c88e698ad35829d573c44f01fd1447208104088888f550d06d18d90bd"
+      },
+      {
+        "path": "test/README.md",
+        "bytes": 149,
+        "sha256": "726d52f7d3e74e7674a4dd7c9a757752f2b90cc4b4f61b8ea1195e503973b216"
+      },
+      {
+        "path": "wit/insecure-seed.wit",
+        "bytes": 1104,
+        "sha256": "9ebba944fef13d4db4a124519349ebf03febaff40f78f818d2c77c926281eb12"
+      },
+      {
+        "path": "wit/insecure.wit",
+        "bytes": 863,
+        "sha256": "28880bdfebda2f39f36f5fe5a1d20f6f1e76f1793ff6e973e34ff8cb4cdc633d"
+      },
+      {
+        "path": "wit/random.wit",
+        "bytes": 1149,
+        "sha256": "b36eb876e39d3a0d63d6ca0c6fc4e84278ddc22c48173906645ed3dae3ef0c79"
+      },
+      {
+        "path": "wit/world.wit",
+        "bytes": 112,
+        "sha256": "7db07eadfefe2d2f042b5b7a283d5c5b8ab2a25276c352cfcc6cc9fd1a7b5fc7"
+      }
+    ]
+  },
+  {
+    "label": "wasi-random-v0.2.1",
+    "repository": "https://github.com/WebAssembly/wasi-random",
+    "commit": "e896b4b1cae527474d4413cd38d1eb63341f127b",
+    "url": "https://codeload.github.com/WebAssembly/wasi-random/zip/e896b4b1cae527474d4413cd38d1eb63341f127b",
+    "archive_sha256": "8b40e911c3c284839e925e49d7da036885ed406dc472a6ee0d1db56ab842c409",
+    "archive_bytes": 9250,
+    "files": [
+      {
+        "path": ".github/workflows/main.yml",
+        "bytes": 304,
+        "sha256": "ba67fb6a19b43107e55df8aa32deb0466e4ca7a07ac847a0532a5c7e0b6c31f7"
+      },
+      {
+        "path": "README.md",
+        "bytes": 7207,
+        "sha256": "4fb04c15438878454208649febb1151fd2032c11df1d834e46038f457c067eab"
+      },
+      {
+        "path": "imports.md",
+        "bytes": 4534,
+        "sha256": "6584bacfc540f722abb75c39ff8ad3f6f71a6061f4712adb6f397c9147c0cc1e"
+      },
+      {
+        "path": "test/README.md",
+        "bytes": 149,
+        "sha256": "726d52f7d3e74e7674a4dd7c9a757752f2b90cc4b4f61b8ea1195e503973b216"
+      },
+      {
+        "path": "wit/insecure-seed.wit",
+        "bytes": 1156,
+        "sha256": "43cfc8aa6cd4bffb3774b7b4c9d8ec98d33fc65dcd68adde3a3ecb0a186fa63f"
+      },
+      {
+        "path": "wit/insecure.wit",
+        "bytes": 943,
+        "sha256": "394b052cb2925122a8567be8ed318c793c344651107cb0cb6963dda2ecd3bdae"
+      },
+      {
+        "path": "wit/random.wit",
+        "bytes": 1229,
+        "sha256": "c6234982f2dc66570efb071bf67d99d69dfd9fb0d53defbc463a02dd58b2c164"
+      },
+      {
+        "path": "wit/world.wit",
+        "bytes": 222,
+        "sha256": "6942eb630baa36dab2011a3966e553b10ee168023ac11e31a630798b6dbea064"
+      }
+    ]
+  }
+]

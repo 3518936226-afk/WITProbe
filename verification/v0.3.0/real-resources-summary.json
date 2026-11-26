@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "total": 9,
+  "passed": 9,
+  "official_differential": 8,
+  "policy": {
+    "schema_version": 1,
+    "packages": [
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      },
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "ownership provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "ownership consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "nominal-resource provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "nominal-resource consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "method-result provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "method-result consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "method-rename provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "method-rename consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "original source bytes preserved",
+      "status": "PASS"
+    }
+  ]
+}

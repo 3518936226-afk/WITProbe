@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "rule_set_version": "resource-sync-v3",
+  "analysis_scope": "structural",
+  "direction": "consumer-upgrade",
+  "actual_side": "old",
+  "expected_side": "new",
+  "status": "COMPATIBLE",
+  "exit_code": 0,
+  "changes": [],
+  "findings": [],
+  "dependency_mappings": [
+    {
+      "old_package": "wasi:io@0.2.0",
+      "new_package": "wasi:io@0.2.1"
+    },
+    {
+      "old_package": "wasi:clocks@0.2.0",
+      "new_package": "wasi:clocks@0.2.1"
+    },
+    {
+      "old_package": "wasi:random@0.2.0",
+      "new_package": "wasi:random@0.2.1"
+    },
+    {
+      "old_package": "wasi:sockets@0.2.0",
+      "new_package": "wasi:sockets@0.2.1"
+    },
+    {
+      "old_package": "wasi:filesystem@0.2.0",
+      "new_package": "wasi:filesystem@0.2.1"
+    }
+  ],
+  "detail": "summary",
+  "summary": {
+    "finding_count": 0,
+    "breaking_count": 0,
+    "unknown_count": 0,
+    "error_count": 0,
+    "change_count": 0,
+    "groups": []
+  },
+  "markdown": "# WITProbe compatibility report\n\nStatus: COMPATIBLE\nDirection: consumer-upgrade\nActual provider: old\nExpected contract/environment: new\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: resource-sync-v3\n\n## Summary\n\nFindings: 0; breaking: 0; unknown: 0; errors: 0; changes: 0.\n\n## Explicit dependency version assumptions\n\nEach new package is aligned to the declared old package before structural checking. Original IR is retained; this does not prove runtime resource identity or lifecycle behavior.\n- wasi:io@0.2.0 -> wasi:io@0.2.1\n- wasi:clocks@0.2.0 -> wasi:clocks@0.2.1\n- wasi:random@0.2.0 -> wasi:random@0.2.1\n- wasi:sockets@0.2.0 -> wasi:sockets@0.2.1\n- wasi:filesystem@0.2.0 -> wasi:filesystem@0.2.1\n\n## Findings\n\nAll obligations in the supported synchronous value-type scope are satisfied.\n\n## Changes\n\nNo selected-world contract changes.\n",
+  "parser": {
+    "module": "mizchi/wit",
+    "version": "0.4.1",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec"
+  },
+  "parse_options": {
+    "features": [],
+    "all_features": false,
+    "target_version": null
+  },
+  "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+  "identity_mapping": {
+    "root_package": "wasi:cli",
+    "old_version": "0.2.0",
+    "new_version": "0.2.1"
+  },
+  "old_semantic_hash": "ad897f9daca6f2e795491ad9cd8c451ce597e8291b0c31f3b99c84618c86c1c3",
+  "new_semantic_hash": "8595fa58561b71530f86676694e7b0dee5142efeeae9694f0956cd1ebc40a776"
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "status": "ERROR",
+  "exit_code": 2,
+  "error": {
+    "code": "BASELINE_RULE_VERSION_CHANGED",
+    "message": "Rules changed; recomputing the baseline requires explicit review."
+  }
+}

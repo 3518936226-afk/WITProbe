@@ -1,0 +1,26 @@
+[analysis-tests.txt]
+Total tests: 40, passed: 40, failed: 0.
+
+[parser-run.txt]
+PASS: integration 13/13; upstream 113/113.
+Summary: <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\parser\summary.json
+Native: not run; historical failure is recorded separately.
+
+[integration-run.txt]
+Product integration: 32/32; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\integration
+
+[value-types-run.txt]
+Value-type/report checks: 60/60; official differential 38; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\value-types
+
+[resources-run.txt]
+Resources/mapping checks: 66/66; official 36; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\resources
+
+[real-projects-run.txt]
+Real-project checks: 31/31; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\real-projects
+
+[real-resources-run.txt]
+Real WASI CLI resource break checks: 9/9; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\real-resources
+
+[mutations-run.txt]
+Mutation validation: 4/4 killed; <workspace>\evidence\product-runs\20261126T161113481Z-5627f4ce\mutations
+

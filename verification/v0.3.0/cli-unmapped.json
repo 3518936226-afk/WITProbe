@@ -1,0 +1,278 @@
+{
+  "schema_version": 2,
+  "rule_set_version": "resource-sync-v3",
+  "analysis_scope": "structural",
+  "direction": "provider-upgrade",
+  "actual_side": "new",
+  "expected_side": "old",
+  "status": "UNKNOWN",
+  "exit_code": 3,
+  "changes": [
+    {
+      "kind": "MODIFIED",
+      "symbol": "import/interface:wasi:cli/stdin"
+    },
+    {
+      "kind": "MODIFIED",
+      "symbol": "import/interface:wasi:cli/stderr"
+    },
+    {
+      "kind": "MODIFIED",
+      "symbol": "import/interface:wasi:cli/stdout"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:io/poll@0.2.1"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:io/error@0.2.1"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:io/poll@0.2.0"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:io/error@0.2.0"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:io/streams@0.2.1"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:sockets/tcp@0.2.1"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:sockets/udp@0.2.1"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:io/streams@0.2.0"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:random/random@0.2.1"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:sockets/tcp@0.2.0"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:sockets/udp@0.2.0"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:random/insecure@0.2.1"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:random/random@0.2.0"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:sockets/network@0.2.1"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:filesystem/types@0.2.1"
+    },
+    {
+      "kind": "ADDED",
+      "symbol": "import/interface:wasi:clocks/wall-clock@0.2.1"
+    },
+    {
+      "kind": "REMOVED",
+      "symbol": "import/interface:wasi:random/insecure@0.2.0"
+    }
+  ],
+  "findings": [
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:io/poll@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:io/error@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:io/streams@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/tcp@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/udp@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:random/random@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:random/insecure@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/network@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:filesystem/types@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:clocks/wall-clock@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:filesystem/preopens@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:random/insecure-seed@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:cli/stdin/type/input-stream",
+      "reason": "Nominal resource identities differ by an unmapped package version.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:clocks/monotonic-clock@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/ip-name-lookup@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:cli/stderr/type/output-stream",
+      "reason": "Nominal resource identities differ by an unmapped package version.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:cli/stdout/type/output-stream",
+      "reason": "Nominal resource identities differ by an unmapped package version.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/instance-network@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/tcp-create-socket@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    },
+    {
+      "status": "UNKNOWN",
+      "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+      "symbol": "import/interface:wasi:sockets/udp-create-socket@0.2.1",
+      "reason": "Dependency identity differs only by a version suffix; no mapping was proven.",
+      "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+    }
+  ],
+  "dependency_mappings": [],
+  "detail": "summary",
+  "summary": {
+    "finding_count": 23,
+    "breaking_count": 0,
+    "unknown_count": 23,
+    "error_count": 0,
+    "change_count": 43,
+    "groups": [
+      {
+        "status": "UNKNOWN",
+        "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+        "count": 23,
+        "sample_symbols": [
+          "import/interface:wasi:io/poll@0.2.1",
+          "import/interface:wasi:io/error@0.2.1",
+          "import/interface:wasi:io/streams@0.2.1"
+        ],
+        "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+      }
+    ]
+  },
+  "markdown": "# WITProbe compatibility report\n\nStatus: UNKNOWN\nDirection: provider-upgrade\nActual provider: new\nExpected contract/environment: old\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: resource-sync-v3\n\n## Summary\n\nFindings: 23; breaking: 0; unknown: 23; errors: 0; changes: 43.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION: 23\n  Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n  - Example: import/interface:wasi:io/poll@0.2.1\n  - Example: import/interface:wasi:io/error@0.2.1\n  - Example: import/interface:wasi:io/streams@0.2.1\n\n## Findings\n\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:io/poll@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:io/error@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:io/streams@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/tcp@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/udp@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:random/random@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:random/insecure@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/network@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:filesystem/types@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:clocks/wall-clock@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:filesystem/preopens@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:random/insecure-seed@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:cli/stdin/type/input-stream\n  Nominal resource identities differ by an unmapped package version. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:clocks/monotonic-clock@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/ip-name-lookup@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:cli/stderr/type/output-stream\n  Nominal resource identities differ by an unmapped package version. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:cli/stdout/type/output-stream\n  Nominal resource identities differ by an unmapped package version. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/instance-network@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/tcp-create-socket@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\n- [UNKNOWN] UNMAPPED_DEPENDENCY_VERSION at import/interface:wasi:sockets/udp-create-socket@0.2.1\n  Dependency identity differs only by a version suffix; no mapping was proven. Action: Review the dependency identity mapping explicitly; package versions are not erased automatically.\nShowing 20 of 23 findings; use --detail full for every finding and symbol path.\n\n## Changes\n\n- MODIFIED at import/interface:wasi:cli/stdin\n- MODIFIED at import/interface:wasi:cli/stderr\n- MODIFIED at import/interface:wasi:cli/stdout\n- ADDED at import/interface:wasi:io/poll@0.2.1\n- ADDED at import/interface:wasi:io/error@0.2.1\n- REMOVED at import/interface:wasi:io/poll@0.2.0\n- REMOVED at import/interface:wasi:io/error@0.2.0\n- ADDED at import/interface:wasi:io/streams@0.2.1\n- ADDED at import/interface:wasi:sockets/tcp@0.2.1\n- ADDED at import/interface:wasi:sockets/udp@0.2.1\n- REMOVED at import/interface:wasi:io/streams@0.2.0\n- ADDED at import/interface:wasi:random/random@0.2.1\n- REMOVED at import/interface:wasi:sockets/tcp@0.2.0\n- REMOVED at import/interface:wasi:sockets/udp@0.2.0\n- ADDED at import/interface:wasi:random/insecure@0.2.1\n- REMOVED at import/interface:wasi:random/random@0.2.0\n- ADDED at import/interface:wasi:sockets/network@0.2.1\n- ADDED at import/interface:wasi:filesystem/types@0.2.1\n- ADDED at import/interface:wasi:clocks/wall-clock@0.2.1\n- REMOVED at import/interface:wasi:random/insecure@0.2.0\nShowing 20 of 43 changes; use --detail full for complete definitions.\n",
+  "parser": {
+    "module": "mizchi/wit",
+    "version": "0.4.1",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec"
+  },
+  "parse_options": {
+    "features": [],
+    "all_features": false,
+    "target_version": null
+  },
+  "mapping_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "identity_mapping": {
+    "root_package": "wasi:cli",
+    "old_version": "0.2.0",
+    "new_version": "0.2.1"
+  },
+  "old_semantic_hash": "ad897f9daca6f2e795491ad9cd8c451ce597e8291b0c31f3b99c84618c86c1c3",
+  "new_semantic_hash": "8595fa58561b71530f86676694e7b0dee5142efeeae9694f0956cd1ebc40a776",
+  "findings_truncated": true,
+  "changes_truncated": true,
+  "full_report_hint": "Rerun with --detail full to retain all findings, definitions and IR."
+}

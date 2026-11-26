@@ -1,0 +1,570 @@
+[
+  {
+    "label": "ownership",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1",
+        "reason": "Required type own:wasi:io/streams@0.2.0/type/input-stream is supplied as borrow:wasi:io/streams@0.2.0/type/input-stream.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\ownership\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.1",
+        "--new",
+        "wasi:cli/command@0.2.0"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.splice`\n       type mismatch in function parameter `src`\n       expected own, found borrow (at offset 0x1088f)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "ownership",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1",
+        "reason": "Required type borrow:wasi:io/streams@0.2.0/type/input-stream is supplied as own:wasi:io/streams@0.2.0/type/input-stream.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\ownership\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.0",
+        "--new",
+        "wasi:cli/command@0.2.1"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.splice`\n       type mismatch in function parameter `src`\n       expected borrow, found own (at offset 0x1088f)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "nominal-resource",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1",
+        "reason": "Required type borrow:wasi:io/streams@0.2.0/type/output-stream is supplied as borrow:wasi:io/streams@0.2.0/type/input-stream.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\nominal-resource\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.1",
+        "--new",
+        "wasi:cli/command@0.2.0"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.splice`\n       type mismatch in function parameter `src`\n       resource types are not the same (at offset 0x1088c)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "nominal-resource",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice/param/1",
+        "reason": "Required type borrow:wasi:io/streams@0.2.0/type/input-stream is supplied as borrow:wasi:io/streams@0.2.0/type/output-stream.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\nominal-resource\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.0",
+        "--new",
+        "wasi:cli/command@0.2.1"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.splice`\n       type mismatch in function parameter `src`\n       resource types are not the same (at offset 0x1088c)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "method-result",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.check-write/result"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.check-write/result",
+        "reason": "Required type result:[[\"u32\"],[\"variant:[[\\\"last-operation-failed\\\",[\\\"own:wasi:io/error@0.2.0/type/error\\\"]],[\\\"closed\\\",null]]\"]] is supplied as result:[[\"u64\"],[\"variant:[[\\\"last-operation-failed\\\",[\\\"own:wasi:io/error@0.2.0/type/error\\\"]],[\\\"closed\\\",null]]\"]].",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\method-result\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.1",
+        "--new",
+        "wasi:cli/command@0.2.0"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.check-write`\n       type mismatch with result type\n       type mismatch in ok variant\n       expected primitive `u32` found primitive `u64` (at offset 0x1087d)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "method-result",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 2,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "TYPE_CHANGED",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.check-write/result"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.check-write/result",
+        "reason": "Required type result:[[\"u64\"],[\"variant:[[\\\"last-operation-failed\\\",[\\\"own:wasi:io/error@0.2.0/type/error\\\"]],[\\\"closed\\\",null]]\"]] is supplied as result:[[\"u32\"],[\"variant:[[\\\"last-operation-failed\\\",[\\\"own:wasi:io/error@0.2.0/type/error\\\"]],[\\\"closed\\\",null]]\"]].",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\method-result\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.0",
+        "--new",
+        "wasi:cli/command@0.2.1"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       type mismatch in instance export `[method]output-stream.check-write`\n       type mismatch with result type\n       type mismatch in ok variant\n       expected primitive `u64` found primitive `u32` (at offset 0x1087d)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "method-rename",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 3,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "MISSING_FUNCTION",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice-renamed"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "MISSING_FUNCTION",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice-renamed",
+        "reason": "The supplying party does not provide a required function.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\method-rename\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.1",
+        "--new",
+        "wasi:cli/command@0.2.0"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       missing expected export `[method]output-stream.splice-renamed` (at offset 0x108af)\n",
+      "error": null
+    }
+  },
+  {
+    "label": "method-rename",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "summary": {
+      "finding_count": 1,
+      "breaking_count": 1,
+      "unknown_count": 0,
+      "error_count": 0,
+      "change_count": 3,
+      "groups": [
+        {
+          "status": "BREAKING",
+          "rule_id": "MISSING_FUNCTION",
+          "count": 1,
+          "sample_symbols": [
+            "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice"
+          ],
+          "action": "Restore the required contract or migrate the dependent party explicitly."
+        }
+      ]
+    },
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "MISSING_FUNCTION",
+        "symbol": "import/interface:wasi:io/streams@0.2.0/function/[method]output-stream.splice",
+        "reason": "The supplying party does not provide a required function.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "dependency_mappings": [
+      {
+        "old_package": "wasi:io@0.2.0",
+        "new_package": "wasi:io@0.2.1"
+      },
+      {
+        "old_package": "wasi:clocks@0.2.0",
+        "new_package": "wasi:clocks@0.2.1"
+      },
+      {
+        "old_package": "wasi:random@0.2.0",
+        "new_package": "wasi:random@0.2.1"
+      },
+      {
+        "old_package": "wasi:sockets@0.2.0",
+        "new_package": "wasi:sockets@0.2.1"
+      },
+      {
+        "old_package": "wasi:filesystem@0.2.0",
+        "new_package": "wasi:filesystem@0.2.1"
+      }
+    ],
+    "mapping_sha256": "2d18a634e67e0d0b099b9cd0758f6bdaf83ad78e3249a7e6078575065f11a60e",
+    "regression_exit": 1,
+    "reference": {
+      "args": [
+        "component",
+        "semver-check",
+        "<workspace>\\evidence\\product-runs\\20261126T161113481Z-5627f4ce\\real-resources\\method-rename\\oracle",
+        "--prev",
+        "wasi:cli/command@0.2.0",
+        "--new",
+        "wasi:cli/command@0.2.1"
+      ],
+      "exit": 1,
+      "stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `command`\n       type mismatch for import `wasi:io/streams`\n       missing expected export `[method]output-stream.splice` (at offset 0x1087f)\n",
+      "error": null
+    }
+  }
+]
