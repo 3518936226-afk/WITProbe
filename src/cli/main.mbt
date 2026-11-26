@@ -5,11 +5,18 @@ extern "js" fn args() -> FixedArray[String] =
 ///|
 fn main {
   let argv = args()
-  let output = if argv.length() == 5 {
-    @analyzer.compare_paths(argv[0], argv[1], argv[2], argv[3], argv[4])
+  let output = if argv.length() == 6 {
+    @analyzer.compare_paths_mapped(
+      argv[0],
+      argv[1],
+      argv[2],
+      argv[3],
+      argv[4],
+      argv[5],
+    )
   } else {
     @analyzer.error_json(
-      "ARGUMENT_ERROR", "Internal analyzer expects old, new, old-world, new-world, direction.",
+      "ARGUMENT_ERROR", "Internal analyzer expects old, new, old-world, new-world, direction, mapping JSON.",
       "",
     )
   }
