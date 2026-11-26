@@ -1,0 +1,9 @@
+package demo:calculator@2.0.0;
+
+interface calculator {
+    add: func(a: string, b: string) -> string;
+}
+
+world calculator-world {
+    export calculator;
+}
