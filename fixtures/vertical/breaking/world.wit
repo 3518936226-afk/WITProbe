@@ -1,0 +1,5 @@
+package demo:closed-loop@1.0.0;
+interface calculator {
+    add: func(a: string, b: string) -> string;
+}
+world calculator-world { export calculator; }
