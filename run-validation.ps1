@@ -1,4 +1,4 @@
-param([switch]$SkipMutations)
+param([switch]$SkipMutations,[string]$RealCorpusPath)
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $root = $PSScriptRoot
@@ -33,6 +33,14 @@ try {
   & node scripts/test-product.mjs "$out\integration" *> "$out\integration-run.txt"
   if ($LASTEXITCODE -ne 0) { throw 'Product integration tests failed.' }
   $summary.stages.Add(@{stage='integration';status='PASS'})
+  & node scripts/test-value-types.mjs "$out\value-types" *> "$out\value-types-run.txt"
+  if ($LASTEXITCODE -ne 0) { throw 'Value-type/reference/report tests failed.' }
+  $summary.stages.Add(@{stage='value-types';status='PASS'})
+  if ($RealCorpusPath) {
+    & node scripts/test-real-projects.mjs $RealCorpusPath "$out\real-projects" *> "$out\real-projects-run.txt"
+    if ($LASTEXITCODE -ne 0) { throw 'Real-project checks failed.' }
+    $summary.stages.Add(@{stage='real-projects';status='PASS'})
+  } else { $summary.stages.Add(@{stage='real-projects';status='SKIPPED';reason='Supply -RealCorpusPath after fetching the pinned external corpus.'}) }
   if (!$SkipMutations) {
     & node scripts/test-mutations.mjs "$out\mutations" *> "$out\mutations-run.txt"
     if ($LASTEXITCODE -ne 0) { throw 'Mutation tests failed.' }

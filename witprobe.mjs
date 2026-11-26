@@ -11,16 +11,18 @@ const pin = JSON.parse(fs.readFileSync(path.join(root, 'toolchain.lock.json'), '
 const toolchain = resolveToolchain(root, pin);
 const backend = path.join(root, '_build/js/release/build/local/witprobe/cli/cli.js');
 let ready = false;
-const help = `WITProbe scalar/synchronous prototype (MoonBit analysis, Node.js host)
+const help = `WITProbe synchronous value-type prototype (MoonBit analysis, Node.js host)
   node witprobe.mjs compare --old PATH --new PATH --world NAME
-       [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--out NEW_D_PATH]
+       [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--detail summary|full] [--out NEW_D_PATH]
   node witprobe.mjs baseline create --wit PATH --world NAME --out NEW_D_DIRECTORY
   node witprobe.mjs regression run --baseline PATH --new PATH [--new-world NAME]
-       [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--out NEW_D_PATH]
+       [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--detail summary|full] [--out NEW_D_PATH]
 Use --old-world/--new-world instead of --world when names differ.
 Both comparisons use provider-world contracts; consumer-upgrade is the new caller's expectation.
 Exit: 0 compatible/operation completed, 1 breaking, 2 input/tool/configuration error, 3 unknown.
 No baseline is modified by regression. Output paths must be on D: in this workspace.
+Default summary: counts by rule, at most 20 findings/changes, no embedded IR.
+Use --detail full for all findings, change definitions and contract IR.
 `;
 
 function fail(code, message) { throw Object.assign(new Error(message), { code }); }
@@ -152,7 +154,7 @@ export function createBaseline(input, world, output) {
     semantic_hash: report.old_semantic_hash, contract_hash: hash(report.old_contract), analysis_status: report.status };
   fs.writeFileSync(path.join(destination, 'contract.json'), JSON.stringify(report.old_contract, null, 2) + '\n', { flag: 'wx' });
   fs.writeFileSync(path.join(destination, 'baseline.json'), JSON.stringify(meta, null, 2) + '\n', { flag: 'wx' });
-  return { schema_version: 1, status: 'BASELINE_CREATED', exit_code: 0, baseline: destination, baseline_analysis_status: report.status,
+  return { schema_version: 2, status: 'BASELINE_CREATED', exit_code: 0, baseline: destination, baseline_analysis_status: report.status,
     source_hash: meta.source_hash, semantic_hash: meta.semantic_hash, rule_set_version: meta.rule_set_version };
 }
 
@@ -188,7 +190,24 @@ function parseOptions(args, allowed) {
 function required(options, key) { if (!options[key]) fail('ARGUMENT_ERROR', `Missing --${key}`); return options[key]; }
 function emit(report, options) {
   if (options.format && !['json', 'markdown'].includes(options.format)) fail('FORMAT_ERROR', 'Choose json or markdown.');
-  const text = options.format === 'markdown' ? (report.markdown ?? `# WITProbe\n\nStatus: ${report.status}\n${report.error?.message ?? ''}\n`) : JSON.stringify(report, null, 2) + '\n';
+  if (options.detail && !['summary', 'full'].includes(options.detail)) fail('DETAIL_ERROR', 'Choose summary or full.');
+  const full = options.detail === 'full';
+  let view = report;
+  if (report.summary) {
+    // Presentation only: the MoonBit report owns every decision and count.
+    view = { ...report, detail: full ? 'full' : 'summary' };
+    if (!full) {
+      for (const key of ['old_contract','new_contract','old_semantic_contract','new_semantic_contract','summary_markdown']) delete view[key];
+      view.findings = report.findings.slice(0, 20);
+      view.changes = report.changes.slice(0, 20).map(({ kind, symbol }) => ({ kind, symbol }));
+      view.findings_truncated = report.findings.length > view.findings.length;
+      view.changes_truncated = report.changes.length > view.changes.length;
+      view.markdown = report.summary_markdown;
+      view.full_report_hint = 'Rerun with --detail full to retain all findings, definitions and IR.';
+    } else delete view.summary_markdown;
+  }
+  const markdown = full ? report.markdown : (report.summary_markdown ?? report.markdown);
+  const text = options.format === 'markdown' ? (markdown ?? `# WITProbe\n\nStatus: ${report.status}\n${report.error?.message ?? ''}\n`) : JSON.stringify(view, null, 2) + '\n';
   if (options.out) {
     const output = dPath(options.out);
     if (fs.existsSync(output)) fail('OUTPUT_EXISTS', 'Report output already exists; choose a new path.');
@@ -202,14 +221,14 @@ function main(argv) {
   if (!argv.length || argv[0] === '--help') { process.stdout.write(help); return; }
   let options, report;
   if (argv[0] === 'compare') {
-    options = parseOptions(argv.slice(1), ['old','new','world','old-world','new-world','direction','format','out']);
+    options = parseOptions(argv.slice(1), ['old','new','world','old-world','new-world','direction','format','detail','out']);
     report = compare(required(options, 'old'), required(options, 'new'), options['old-world'] || options.world, options['new-world'] || options.world, options.direction);
   } else if (argv[0] === 'baseline' && argv[1] === 'create') {
     options = parseOptions(argv.slice(2), ['wit','world','out']);
     report = createBaseline(required(options, 'wit'), required(options, 'world'), required(options, 'out'));
     options = {};
   } else if (argv[0] === 'regression' && argv[1] === 'run') {
-    options = parseOptions(argv.slice(2), ['baseline','new','new-world','direction','format','out']);
+    options = parseOptions(argv.slice(2), ['baseline','new','new-world','direction','format','detail','out']);
     report = regression(required(options, 'baseline'), required(options, 'new'), options['new-world'], options.direction);
   } else fail('ARGUMENT_ERROR', 'Unknown command; use --help.');
   emit(report, options);
@@ -218,7 +237,7 @@ function main(argv) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try { main(process.argv.slice(2)); }
   catch (error) {
-    process.stdout.write(JSON.stringify({ schema_version: 1, status: 'ERROR', exit_code: 2,
+    process.stdout.write(JSON.stringify({ schema_version: 2, status: 'ERROR', exit_code: 2,
       error: { code: error.code || 'IO_OR_TOOL_ERROR', message: error.message } }, null, 2) + '\n');
     process.exitCode = 2;
   }

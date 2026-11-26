@@ -1,5 +1,7 @@
 # WITProbe 优化落实与后续计划 V1.2
 
+> 历史计划：本文描述常见类型扩展之前的阶段。当前 0.2.0 的支持范围、已上传状态与真实复测以 README.md、CURRENT_STATUS.md 和 verification/v0.2.0 为准。
+
 **日期：** 2026-11-26  
 **当前成果：** 已有 MoonBit 分析库、可运行 JS/Node CLI、结构化报告和源契约基线的小闭环。  
 **当前范围：** 基础标量、标量别名、同步函数，以及 World 的 Import/Export 约束。复杂类型保留并给 UNKNOWN。
