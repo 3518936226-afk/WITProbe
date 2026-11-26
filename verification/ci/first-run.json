@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/3518936226-afk/WITProbe",
+  "run_url": "https://github.com/3518936226-afk/WITProbe/actions/runs/45858918520",
+  "run_id": "45858918520",
+  "commit": "3c38f1a9c2f8495b7ed3692472b48d7a116e449b",
+  "status": "SUCCESS",
+  "job_duration_seconds": 91,
+  "total_duration_seconds": 93,
+  "runner": "windows-2025",
+  "clean_checkout": true,
+  "build_cache": false,
+  "analysis": 40,
+  "integration": 32,
+  "value_types": 60,
+  "resources": 66,
+  "real_projects": 31,
+  "real_resources": 9,
+  "mutations_caught": 4,
+  "artifact_id": "15137306820",
+  "artifact_sha256": "51d644bcc058b569b3ea15439001212e435653e4abe2ef68a136226704a567d9",
+  "artifact_bytes": 1501674,
+  "warning": "Legacy action Node20 runtime; superseded by Node24-action confirmation."
+}

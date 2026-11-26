@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-11-27",
+  "repository": "https://github.com/3518936226-afk/WITProbe",
+  "workflow": ".github/workflows/full-validation.yml",
+  "run_url": "https://github.com/3518936226-afk/WITProbe/actions/runs/45859517167",
+  "run_id": "45859517167",
+  "job_url": "https://github.com/3518936226-afk/WITProbe/actions/runs/45859517167/job/140046556239",
+  "commit": "8333b40edad47cd01dde80f0f5c591c0d535ab0b",
+  "status": "SUCCESS",
+  "job_duration_seconds": 109,
+  "total_duration_seconds": 112,
+  "runner": "windows-2025",
+  "fresh_checkout": true,
+  "fresh_tools": true,
+  "build_cache_restored": false,
+  "all_required_stages_passed": true,
+  "tracked_source_unchanged": true,
+  "untracked_source_absent": true,
+  "suites": {
+    "analysis": {
+      "passed": 40,
+      "total": 40
+    },
+    "integration": {
+      "passed": 32,
+      "total": 32
+    },
+    "value_types": {
+      "passed": 60,
+      "total": 60
+    },
+    "resources": {
+      "passed": 66,
+      "total": 66
+    },
+    "real_projects": {
+      "passed": 31,
+      "total": 31
+    },
+    "real_resources": {
+      "passed": 9,
+      "total": 9
+    },
+    "mutations": {
+      "caught": 4,
+      "total": 4
+    }
+  },
+  "demo_and_local_gate": "PASS",
+  "artifacts": {
+    "count": 1,
+    "section_url": "https://github.com/3518936226-afk/WITProbe/actions/runs/45859517167#artifacts",
+    "retention_days": 7
+  },
+  "actions": {
+    "checkout": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "upload_artifact": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  "runtime_warning_present": false,
+  "native": "NOT_RUN",
+  "business_component_runtime": "NOT_RUN",
+  "local_configured_C_drive_write_bytes": 0
+}
