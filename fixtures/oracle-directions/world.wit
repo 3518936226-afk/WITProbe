@@ -1,0 +1,15 @@
+package demo:directions@1.0.0;
+
+world baseline {
+    export run: func();
+}
+
+world more-exports {
+    export run: func();
+    export extra: func();
+}
+
+world more-imports {
+    import host: func();
+    export run: func();
+}
