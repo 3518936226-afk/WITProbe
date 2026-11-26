@@ -59,7 +59,7 @@ for(const [name,oldDef,newDef] of cases){
 }
 function cli(args){const r=spawnSync(process.execPath,[path.join(root,'witprobe.mjs'),...args],{env,cwd:root,encoding:'utf8',timeout:120000,maxBuffer:32*1024*1024,windowsHide:true});assert(!r.error);return{...r,report:JSON.parse(r.stdout)};}
 const large=path.join(output,'large');fs.mkdirSync(large);
-const funcs=Array.from({length:40},(_,i)=>`call${i}: func(x: own<handle>);`).join('\n');
+const funcs=Array.from({length:40},(_,i)=>`call${i}: func(x: future<u32>);`).join('\n');
 fs.writeFileSync(path.join(large,'world.wit'),`package demo:summary; interface api { resource handle; ${funcs} } world app { export api; }\n`);
 test('CLI summary keeps exact counts and bounded details',()=>{
   const args=['compare','--old',large,'--new',large,'--world','app'];

@@ -36,7 +36,7 @@ for(const pkg of ['random','cli']){
     test(`${pkg} ${v} official parse`,()=>official(`${pkg}-${v}-official-parse`,['component','wit',source(pkg,v),'--json'],0));
     test(`${pkg} ${v} unchanged real World`,()=>{
       const r=compare(source(pkg,v),source(pkg,v),world,world);save(`${pkg}-${v}-self`,r);
-      assert.equal(r.status,expectedStatus);assert.equal(r.exit_code,expectedExit);
+      assert.equal(r.status,'COMPATIBLE');assert.equal(r.exit_code,0);
     });
   }
   const oracle=path.join(output,'oracle',pkg);fs.mkdirSync(path.join(oracle,'deps'),{recursive:true});
@@ -55,7 +55,7 @@ for(const pkg of ['random','cli']){
       assert.equal(r.status,expectedStatus);assert.equal(r.exit_code,expectedExit);
       if(pkg==='random')assert.equal(r.findings.length,0);
       else {
-        assert(r.findings.some(f=>f.rule_id==='UNSUPPORTED_RESOURCE'));
+        assert(!r.findings.some(f=>f.rule_id==='UNSUPPORTED_RESOURCE')); 
         assert(r.findings.some(f=>f.rule_id==='UNMAPPED_DEPENDENCY_VERSION'));
         assert(!r.findings.some(f=>f.rule_id==='UNSUPPORTED_COMPOSITE'));
       }
@@ -64,10 +64,37 @@ for(const pkg of ['random','cli']){
   const baseline=path.join(output,pkg+'-baseline');
   test(`${pkg} baseline/regression integrity`,()=>{
     const created=createBaseline(source(pkg,'0.2.0'),world,baseline);save(pkg+'-baseline-created',created);
-    assert.equal(created.baseline_analysis_status,expectedStatus);
+    assert.equal(created.baseline_analysis_status,'COMPATIBLE');
     const before=hashes(baseline),r=regression(baseline,source(pkg,'0.2.1'));
     save(pkg+'-regression',r);assert.equal(r.status,expectedStatus);assert.deepEqual(hashes(baseline),before);
   });
+  if(pkg==='cli') {
+    const mapFile=path.join(root,'fixtures/wasi-cli-0.2.0-to-0.2.1.mapping.json');
+    const mapping=read(mapFile);
+    for(const direction of ['provider-upgrade','consumer-upgrade'])test('CLI explicitly mapped '+direction,()=>{
+      const r=compare(source(pkg,'0.2.0'),source(pkg,'0.2.1'),world,world,direction,mapping);
+      save('cli-mapped-'+direction,r);assert.equal(r.status,'COMPATIBLE');assert.equal(r.findings.length,0);
+      assert.equal(r.dependency_mappings.length,5);assert.match(r.mapping_sha256,/^[a-f0-9]{64}$/);
+      assert(r.markdown.includes('wasi:io@0.2.1'));
+      assert(r.new_contract.imports.some(e=>e.key.includes('@0.2.1')));
+      assert(r.comparison_new_contract.imports.some(e=>e.key.includes('@0.2.0')));
+      const permuted={...mapping,packages:[...mapping.packages].reverse()};
+      assert.equal(compare(source(pkg,'0.2.0'),source(pkg,'0.2.1'),world,world,direction,permuted).mapping_sha256,r.mapping_sha256);
+    });
+    test('CLI mapped regression and actual gate',()=>{
+      const before=hashes(baseline);
+      const r=regression(baseline,source(pkg,'0.2.1'),undefined,'provider-upgrade',mapping);save('cli-mapped-regression',r);
+      assert.equal(r.status,'COMPATIBLE');assert.deepEqual(hashes(baseline),before);
+      const args=['-NoProfile','-File',path.join(root,'scripts/ci-gate.ps1'),'-Baseline',baseline,'-New',source(pkg,'0.2.1'),'-DependencyMap',mapFile];
+      const gate=spawnSync('pwsh',args,{env,encoding:'utf8',windowsHide:true,timeout:120000,maxBuffer:32*1024*1024});
+      save('cli-mapped-gate',{command:'pwsh',args,exit:gate.status,stdout:gate.stdout,stderr:gate.stderr});
+      assert(!gate.error);assert.equal(gate.status,0);
+    });
+    test('CLI partial mapping does not erase remaining versions',()=>{
+      const r=compare(source(pkg,'0.2.0'),source(pkg,'0.2.1'),world,world,'provider-upgrade',{schema_version:1,packages:mapping.packages.slice(0,1)});
+      save('cli-partial-map',r);assert.equal(r.status,'UNKNOWN');
+    });
+  }
   test(`${pkg} actual local gate exit`,()=>{
     const args=['-NoProfile','-File',path.join(root,'scripts/ci-gate.ps1'),'-Baseline',baseline,'-New',source(pkg,'0.2.1')];
     const r=spawnSync('pwsh',args,{env,encoding:'utf8',windowsHide:true,timeout:120000,maxBuffer:32*1024*1024});

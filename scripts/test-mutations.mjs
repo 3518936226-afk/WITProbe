@@ -11,10 +11,11 @@ fs.mkdirSync(output, { recursive: true });
 const pin = JSON.parse(fs.readFileSync(path.join(root,'toolchain.lock.json'),'utf8').replace(/^\uFEFF/,''));
 const toolchain = resolveToolchain(root, pin);
 const rows = [];
-for (const [name, before, after] of [
-  ['reverse-direction','direction == "provider-upgrade"','direction != "provider-upgrade"'],
-  ['ignore-scalar-change','actual.shape != expected.shape','false'],
-  ['swallow-unknown','f.status == "UNKNOWN"','f.status == "__MUTATED_UNKNOWN__"'],
+for (const [name, moduleFile, before, after] of [
+  ['reverse-direction','contract/compare.mbt','direction == "provider-upgrade"','direction != "provider-upgrade"'],
+  ['ignore-scalar-change','contract/compare.mbt','actual.shape != expected.shape','false'],
+  ['swallow-unknown','contract/compare.mbt','f.status == "UNKNOWN"','f.status == "__MUTATED_UNKNOWN__"'],
+  ['ignore-resource-identity','analyzer/adapter.mbt','kind + ":" + identity','kind + ":__any_resource__"'],
 ]) {
   const project = path.join(output, name);
   fs.mkdirSync(project);
@@ -22,7 +23,7 @@ for (const [name, before, after] of [
   fs.cpSync(path.join(root,'src'),path.join(project,'src'),{recursive:true});
   fs.cpSync(path.join(root,'.mooncakes'),path.join(project,'.mooncakes'),{recursive:true});
   fs.writeFileSync(path.join(project,'moon.work'),`members = [".", ${JSON.stringify(path.join(root,'work/vendor/wit').replaceAll('\\','/'))}]\n`);
-  const file = path.join(project,'src/contract/compare.mbt'), source = fs.readFileSync(file,'utf8');
+  const file = path.join(project,'src',moduleFile), source = fs.readFileSync(file,'utf8');
   if (source.split(before).length !== 2) throw new Error(`Mutation anchor is not unique: ${name}`);
   fs.writeFileSync(file,source.replace(before,after));
   const tmp = path.join(project,'tmp'); fs.mkdirSync(tmp);
