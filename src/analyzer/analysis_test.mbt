@@ -99,22 +99,22 @@ test "public unused scalar type removal is breaking" {
 }
 
 ///|
-test "public unused record containing resource stays unknown" {
+test "public unused record containing resource is supported" {
   let a = "package demo:test; interface api { resource handle; record item { value: own<handle> } } world app { export api; }"
   let r = analyze(a, a, "provider-upgrade")
-  assert_eq(r.status, "UNKNOWN")
-  assert_true(r.findings.any(fn(f) { f.rule_id == "UNSUPPORTED_RESOURCE" }))
+  assert_eq(r.status, "COMPATIBLE")
+  assert_eq(r.findings.length(), 0)
 }
 
 ///|
-test "public resource gives actionable code" {
+test "public resource retains nominal identity" {
   let a = "package demo:test; interface api { resource item; } world app { export api; }"
   let r = analyze(a, a, "provider-upgrade")
-  assert_eq(r.status, "UNKNOWN")
+  assert_eq(r.status, "COMPATIBLE")
   assert_true(
-    r.findings.any(fn(f) {
-      f.rule_id == "UNSUPPORTED_RESOURCE" && f.action.length() > 0
-    }),
+    r.old_contract.exports[0].types[0].ty.shape.contains(
+      "demo:test/api/type/item",
+    ),
   )
 }
 
@@ -152,7 +152,7 @@ test "parameter order is preserved and changes remain visible" {
 
 ///|
 test "breaking wins but unknown findings are retained" {
-  let a = "package demo:test; interface api { resource item; } world app { export api; export run: func(); }"
+  let a = "package demo:test; interface api { resource item; type pending = future<u32>; } world app { export api; export run: func(); }"
   let b = "package demo:test; interface api { resource item; } world app { export api; }"
   let r = analyze(a, b, "provider-upgrade")
   assert_eq(r.status, "BREAKING")

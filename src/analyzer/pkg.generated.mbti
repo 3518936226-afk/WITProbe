@@ -10,6 +10,8 @@ import {
 // Values
 pub fn compare_paths(String, String, String, String, String) -> @json.Json
 
+pub fn compare_paths_mapped(String, String, String, String, String, String) -> @json.Json
+
 pub fn error_json(String, String, String) -> @json.Json
 
 pub fn from_resolve(@wit.ResolveInput) -> @contract.Contract

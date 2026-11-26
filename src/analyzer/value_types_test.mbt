@@ -118,36 +118,24 @@ test "public unused value type change cannot escape analysis" {
 }
 
 ///|
-test "unsupported nested resource and future remain unknown" {
+test "nested resources are supported and future remains unknown" {
   for
     ty in [
-      "list<own<handle>>", "option<borrow<handle>>", "tuple<u32, own<handle>>", "result<u32, own<handle>>",
-      "result<own<handle>, u32>", "list<future<u32>>", "option<stream<u32>>",
+      "list<own<handle>>", "option<borrow<handle>>", "tuple<u32, own<handle>>", "result<own<handle>, u32>",
     ] {
     let a = value_source("resource handle;", ty, "u32")
-    let r = value_report(a, a, "provider-upgrade")
-    assert_eq(r.status, "UNKNOWN")
-    assert_true(r.findings.any(fn(f) { f.symbol.contains("/param/x") }))
+    assert_eq(value_report(a, a, "provider-upgrade").status, "COMPATIBLE")
   }
-  for
-    definition in [
-      "resource handle; record t { value: own<handle> }", "resource handle; variant t { value(own<handle>), empty }",
-    ] {
-    let a = value_source(definition, "t", "u32")
-    let r = value_report(a, a, "provider-upgrade")
-    assert_eq(r.status, "UNKNOWN")
-    assert_true(
-      r.findings.any(fn(f) {
-        f.rule_id == "UNSUPPORTED_RESOURCE" && f.symbol.contains("/param/x")
-      }),
-    )
+  for ty in ["list<future<u32>>", "option<stream<u32>>"] {
+    let a = value_source("", ty, "u32")
+    assert_eq(value_report(a, a, "provider-upgrade").status, "UNKNOWN")
   }
 }
 
 ///|
 test "known break wins over nested unsupported type" {
-  let a = value_source("resource handle;", "list<own<handle>>", "list<u32>")
-  let b = value_source("resource handle;", "list<own<handle>>", "list<u64>")
+  let a = value_source("resource handle;", "list<future<u32>>", "list<u32>")
+  let b = value_source("resource handle;", "list<future<u32>>", "list<u64>")
   let r = value_report(a, b, "provider-upgrade")
   assert_eq(r.status, "BREAKING")
   assert_true(r.findings.any(fn(f) { f.status == "UNKNOWN" }))
@@ -158,7 +146,7 @@ test "known break wins over nested unsupported type" {
 test "summary totals are exact and samples are bounded" {
   let functions : Array[String] = []
   for i = 0; i < 40; i = i + 1 {
-    functions.push("call" + i.to_string() + ": func(x: own<handle>);")
+    functions.push("call" + i.to_string() + ": func(x: future<u32>);")
   }
   let a = "package demo:values; interface api { resource handle; " +
     functions.join(" ") +
