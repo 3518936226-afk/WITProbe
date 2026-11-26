@@ -1,0 +1,5 @@
+package demo:common@1.0.0;
+
+interface types {
+    type number = u32;
+}
