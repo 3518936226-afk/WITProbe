@@ -1,8 +1,8 @@
 {
   "verified_date": "2026-11-26",
   "stage": "phase1-parser-feasibility",
-  "moon": "0.1.20261119 (738607b 2026-11-19)",
-  "moonc": "v0.10.22+124d61d05 (2026-11-19)",
+  "moon": "0.1.20261126 (ccd306a 2026-11-26)",
+  "moonc": "v1.0.0-rc1+3c0520448 (2026-11-26)",
   "wit": {
     "module": "mizchi/wit",
     "commit": "df59b4068926667eab2302a4daabecefad4c28ec",

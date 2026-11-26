@@ -11,7 +11,7 @@ New-Item -ItemType Directory -Path $out -Force | Out-Null
 $names = @('MOON_HOME','PATH','TEMP','TMP','TMPDIR','MOON_DEP_CACHE','MOON_BUILD_CACHE','PYTHONDONTWRITEBYTECODE')
 $before = @{}
 foreach ($name in $names) { $before[$name] = [Environment]::GetEnvironmentVariable($name,'Process') }
-$summary = [ordered]@{status='RUNNING';directory=$out;stages=[Collections.Generic.List[object]]::new();remote_ci='NOT_RUN';native='NOT_RUN'}
+$summary = [ordered]@{status='RUNNING';directory=$out;stages=[Collections.Generic.List[object]]::new();remote_ci=if($env:GITHUB_ACTIONS -eq 'true'){'RUNNING'}else{'NOT_RUN'};native='NOT_RUN';source_commit=$env:GITHUB_SHA;run_url=if($env:GITHUB_ACTIONS -eq 'true'){"https://github.com/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"}else{$null}}
 Push-Location $root
 try {
   & "$root\run-phase1.ps1" -EvidenceDir "$out\parser" -NoLatestPointer *> "$out\parser-run.txt"
@@ -58,6 +58,7 @@ try {
   $summary.error = $_.Exception.Message
   throw
 } finally {
+  if($env:GITHUB_ACTIONS -eq 'true'){$summary.remote_ci=if($summary.status -eq 'PASS'){'VALIDATION_PASSED'}else{'FAILED'}}
   $summary | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$out\summary.json" -Encoding utf8
   @{status=$summary.status;summary="$out\summary.json"} | ConvertTo-Json | Set-Content -LiteralPath "$root\evidence\latest-product-run.json" -Encoding utf8
   Pop-Location

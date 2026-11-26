@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "platform": "windows-x86_64",
+  "moon": {"url":"https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.zip","sha256":"6f2d0b32a2327decbcee14b39bd037c831ab055b6faf5bb9d1afe5db28fda0ab"},
+  "core": {"url":"https://cli.moonbitlang.com/cores/core-latest.zip","sha256":"77e1b9c73a9aba7bfa7a5c06687ba7ab2335305c8328e168bdc25d9f6237a08c"},
+  "node": {"url":"https://nodejs.org/dist/v24.20.0/node-v24.20.0-win-x64.zip","sha256":"6cac9ffbca8f6a47091e4b5c772e0606049c3871cb67d900c0cedde630e545ba"},
+  "python": {"url":"https://www.python.org/ftp/python/3.14.4/python-3.14.4-embed-amd64.zip","sha256":"cda80a9b1e75c0f1b4f9872ca1b417f0d19bce32facc811aea9180e70fad5fb9"}
+}
