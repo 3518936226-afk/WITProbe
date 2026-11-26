@@ -32,6 +32,27 @@ fn finding(
 }
 
 ///|
+// Used only to classify an unresolved version-only mismatch as UNKNOWN.
+// This function never establishes compatibility or applies a mapping.
+fn resource_version_shape(shape : String) -> String {
+  let chunks = shape.split("@").to_array()
+  let out = [chunks[0].to_owned()]
+  for i = 1; i < chunks.length(); i = i + 1 {
+    let parts = chunks[i].split("/").to_array()
+    if parts.length() >= 3 && parts[1] == "type" {
+      let tail : Array[String] = []
+      for j = 1; j < parts.length(); j = j + 1 {
+        tail.push(parts[j].to_owned())
+      }
+      out.push("/" + tail.join("/"))
+    } else {
+      out.push("@" + chunks[i].to_owned())
+    }
+  }
+  out.join("")
+}
+
+///|
 fn check_type(
   actual : TypeDesc,
   expected : TypeDesc,
@@ -41,6 +62,15 @@ fn check_type(
   if actual.unsupported is None &&
     expected.unsupported is None &&
     actual.shape != expected.shape {
+    if resource_version_shape(actual.shape) ==
+      resource_version_shape(expected.shape) {
+      out.push(
+        finding(
+          "UNKNOWN", "UNMAPPED_DEPENDENCY_VERSION", path, "Nominal resource identities differ by an unmapped package version.",
+        ),
+      )
+      return
+    }
     out.push(
       finding(
         "BREAKING",
@@ -64,6 +94,23 @@ fn check_function(
   out : Array[Finding],
 ) -> Unit {
   if actual.unsupported is Some(_) || expected.unsupported is Some(_) {
+    return
+  }
+  if actual.kind != expected.kind {
+    if resource_version_shape(actual.kind) ==
+      resource_version_shape(expected.kind) {
+      out.push(
+        finding(
+          "UNKNOWN", "UNMAPPED_DEPENDENCY_VERSION", path, "Resource owner versions require an explicit mapping.",
+        ),
+      )
+      return
+    }
+    out.push(
+      finding(
+        "BREAKING", "FUNCTION_KIND_CHANGED", path, "Function kind or nominal resource owner differs.",
+      ),
+    )
     return
   }
   if actual.params.length() != expected.params.length() {
@@ -415,7 +462,7 @@ pub fn compare(old : Contract, new : Contract, direction : String) -> Report {
   }
   {
     schema_version: 2,
-    rule_set_version: "value-sync-v2",
+    rule_set_version: "resource-sync-v3",
     analysis_scope: "structural",
     direction,
     actual_side: if provider {
@@ -437,6 +484,8 @@ pub fn compare(old : Contract, new : Contract, direction : String) -> Report {
     },
     old_contract: old,
     new_contract: new,
+    dependency_mappings: [],
+    comparison_new_contract: None,
     changes,
     findings,
   }

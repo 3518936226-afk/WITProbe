@@ -97,6 +97,15 @@ pub(all) struct Report {
   new_contract : Contract
   changes : Array[Change]
   findings : Array[Finding]
+  dependency_mappings : Array[DependencyMapping]
+  comparison_new_contract : Contract?
+}
+
+///|
+#derive(Eq, Debug, ToJson)
+pub(all) struct DependencyMapping {
+  old_package : String
+  new_package : String
 }
 
 ///|
@@ -186,6 +195,17 @@ fn Report::render_markdown(self : Report, limit : Int32) -> String {
     summary.change_count.to_string() +
     ".",
   ]
+  if !self.dependency_mappings.is_empty() {
+    lines.push("")
+    lines.push("## Explicit dependency version assumptions")
+    lines.push("")
+    lines.push(
+      "Each new package is aligned to the declared old package before structural checking. Original IR is retained; this does not prove runtime resource identity or lifecycle behavior.",
+    )
+    for pair in self.dependency_mappings {
+      lines.push("- " + pair.old_package + " -> " + pair.new_package)
+    }
+  }
   for group in summary.groups {
     lines.push(
       "- [" +

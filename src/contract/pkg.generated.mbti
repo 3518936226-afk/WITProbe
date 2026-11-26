@@ -32,6 +32,12 @@ pub(all) struct Contract {
 pub fn Contract::semantic_json(Self) -> @json.Json
 
 #derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct DependencyMapping {
+  old_package : String
+  new_package : String
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
 pub(all) struct Edge {
   key : String
   kind : String
@@ -95,6 +101,8 @@ pub(all) struct Report {
   new_contract : Contract
   changes : Array[Change]
   findings : Array[Finding]
+  dependency_mappings : Array[DependencyMapping]
+  comparison_new_contract : Contract?
 }
 pub fn Report::json(Self) -> @json.Json
 pub fn Report::markdown(Self) -> String
