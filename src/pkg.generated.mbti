@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "local/witprobe"
+
+import {
+  "mizchi/wit",
+}
+
+// Values
+pub fn load_world(String, String) -> Result[@wit.ResolveInput, @wit.ParseError]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
