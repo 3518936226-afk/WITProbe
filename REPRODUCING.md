@@ -1,6 +1,6 @@
 # 从干净仓库复现完整验证
 
-环境：Windows x64、可写 D 盘路径、Git、PowerShell 7、网络。私有仓库需要访问权限；Linux/macOS 不在本次验收范围。
+环境：Windows x64、可写 D 盘路径、Git、PowerShell 7、网络。仓库已公开，HTTPS 克隆不需要账号或仓库授权；Linux/macOS 不在本次验收范围。
 
 ## 首次准备
 

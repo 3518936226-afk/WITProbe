@@ -35,4 +35,8 @@ WASI Random and previous List/Tuple break experiments remain covered. Test injec
 
 Supported: synchronous value/resource contract structure, nominal origins and aliases, own/borrow, constructors/methods/statics, and explicit one-to-one same-package version mapping. Ambiguous/coexisting-version mappings are rejected. Async/accessor proposals, external/unresolved identities and additional container proposals remain conservative UNKNOWN.
 
-This does not execute destructors or prove runtime lifetime safety, actual resource instance identity or business behavior. Native and real business-component interoperability remain unverified; Windows GitHub Actions has now passed. The existing pinned MoonBit toolchain was reused; this is not a new-machine installation test. Older plans and verification directories are historical.
+This does not execute destructors or prove runtime lifetime safety, actual resource instance identity or business behavior. Native and real business-component interoperability remain unverified. Windows GitHub Actions passed using a fresh checkout and freshly bootstrapped pinned tools without restored build caches. Older local reports that reused an existing toolchain remain historical.
+
+## Public delivery (2026-11-27)
+
+The repository is public. WITProbe's own code and documentation use the MIT license; upstream license texts and notices are preserved. [Application](contest/APPLICATION.md), [PDF](contest/WITProbe-Application.pdf), [contribution and AI disclosure](contest/CONTRIBUTIONS_AND_AI.md), and [submission checklist](contest/SUBMISSION_CHECKLIST.md) are provided. Competition registration, participant identity, group membership, and the participant's own rehearsal are not certified by this repository.

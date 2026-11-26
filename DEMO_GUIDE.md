@@ -1,6 +1,6 @@
 # WITProbe 0.3.0 本地演示与复现
 
-当前示例全部位于 D 盘，不需要安装新依赖或修改系统配置。需使用锁文件对应的现有 MoonBit、Node、Git 与参考工具；Native 不属于本次演示范围。
+环境为 Windows x64、PowerShell 7、Git、可写 D 盘及网络。首次克隆必须先按 [REPRODUCING.md](REPRODUCING.md) 准备锁定工具与依赖；完成准备后再执行下面的演示。Native 不属于本次演示范围。
 
 ## 一键演示
 
@@ -53,10 +53,39 @@ $LASTEXITCODE
 .\run-validation.ps1
 ```
 
-该脚本执行上游/接入检查、分析测试、产品集成、官方有限对照及 3 种源码变异。每次保存独立目录，索引见 `evidence/latest-product-run.json`。变异的独立源码副本及预期失败日志全部保留，没有删除原工程文件。
+该脚本执行解析器、分析、产品集成、类型/报告、资源/映射、4 种源码变异；提供 RealCorpusPath 时还执行真实项目与真实资源检查，完整八阶段命令见 REPRODUCING.md。每次保存独立目录，索引见 `evidence/latest-product-run.json`。变异的独立源码副本及预期失败日志全部保留，没有删除原工程文件。
 
 默认 JSON/Markdown 为精简汇总；使用 `--detail full` 保存完整明细和 IR。基础值类型 Record 不再因为类型种类而返回 UNKNOWN，演示中的 Record 明确含有尚未支持的 Future 字段。
 
 旧 scalar-sync-v1 基线不可静默复用；人工复核后，在新目录创建 resource-sync-v3 基线。真实语料的获取与完整测试命令见 README。
 
-远程 CI 尚未配置或运行。本地门禁检查使用真实子进程退出码，记录于演示汇总；它不代表已在 GitHub Actions 运行成功。
+远程 [完整 Windows CI 已实际通过](https://github.com/3518936226-afk/WITProbe/actions/runs/45859517167)，采用干净 checkout、新下载的锁定工具、无恢复缓存。本地 demo 只证明当前这轮本地演示，因此其 summary 中 remote_ci=NOT_RUN 仍是正确记录；远程结果另见 verification/ci/，不能把两者混为一轮运行。
+
+## 五分钟评审演示顺序
+
+| 时间 | 操作 | 讲解重点 |
+|---|---|---|
+| 0:00-0:40 | 展示 README、LICENSE 和 src/contract | WIT 解析成功不等于契约可替换；说明上游解析器与自有核心 |
+| 0:40-2:00 | 运行一键演示，打开 provider-added 与 consumer-added 报告 | 同一变化的升级方向不同；展示规则编号、差异与退出码 |
+| 2:00-2:50 | 打开 public-unused-record、signature-breaking、ci-gate 报告 | UNKNOWN 不能冒充兼容；真实门禁应拒绝非零退出码 |
+| 2:50-4:10 | 执行下述 WASI CLI 原始版本比较 | 未映射 UNKNOWN；声明五包映射后 COMPATIBLE；展示报告假设 |
+| 4:10-5:00 | 展示 CURRENT_STATUS、verification/v0.3.0/real-resource-breaks.json 与远程 CI | 原始上游与受控破坏分开；明确运行时能力未验证 |
+
+### WASI CLI 手工比较
+
+以下命令接续 REPRODUCING.md 中同一会话，$corpusRoot 指向已下载目录；输出到标准输出，不覆盖文件。依次读取实际退出码：
+
+```powershell
+$oldCli = Join-Path $corpusRoot 'corpus/wasi-cli-v0.2.0/wit'
+$newCli = Join-Path $corpusRoot 'corpus/wasi-cli-v0.2.1/wit'
+node .\witprobe.mjs compare --old $oldCli --new $newCli --world command
+$LASTEXITCODE # 3，UNKNOWN
+node .\witprobe.mjs compare --old $oldCli --new $newCli --world command --dependency-map .\fixtures\wasi-cli-0.2.0-to-0.2.1.mapping.json --format markdown
+$LASTEXITCODE # 0，COMPATIBLE，含映射假设
+```
+
+映射不是跳过结构检查，也不证明任意组件运行时能够直接链接这两个版本。资源破坏测试在独立副本中执行，结果不是上游漏洞公告。现场不必重新下载工具和执行全部测试；完整复现是另一条可核对的验收路径。
+
+### 提交者演练
+
+本人需能独立解释上述方向、UNKNOWN、映射和门禁，AI 自动运行不代替本人演练。讲解提纲和贡献披露见 [contest/CONTRIBUTIONS_AND_AI.md](contest/CONTRIBUTIONS_AND_AI.md)，报名待办见 [contest/SUBMISSION_CHECKLIST.md](contest/SUBMISSION_CHECKLIST.md)。

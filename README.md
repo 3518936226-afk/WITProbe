@@ -2,6 +2,8 @@
 
 **MoonBit WIT 契约演进与回归检查原型，版本 0.3.0。**
 
+[公开仓库](https://github.com/3518936226-afk/WITProbe) · [MIT 许可证](LICENSE) · [一页申报说明](contest/APPLICATION.md) · [申报 PDF](contest/WITProbe-Application.pdf) · [演示说明](DEMO_GUIDE.md) · [贡献与 AI 辅助说明](contest/CONTRIBUTIONS_AND_AI.md)
+
 比较两个服务提供方 World，输出方向性兼容结论、Diff、规则编号和退出码。MoonBit 实现 IR、比较规则、报告及分组汇总，Node 标准库承载文件、SHA256、进程与 CLI。
 
 ## 支持范围
@@ -93,4 +95,4 @@ python scripts/fetch-real-corpus.py $corpusRoot
 
 工具链、依赖检出、构建缓存和运行日志不进入源码交付。verification/ 保留版本化脱敏记录，旧计划和旧记录仅代表当时状态。
 
-项目自身尚未选择开源许可证；第三方代码保留原许可。初始 GitHub 仓库为私有，尚未完成公开开源发布。
+项目自身代码和文档采用 [MIT](LICENSE) 许可证，第三方代码和许可文本保留其原许可证，不因本项目许可而重新授权。GitHub 仓库已于 2026-11-27 改为公开；目前未发布版本标签或 Mooncakes 包。报名、身份信息与赛事群状态见 [提交清单](contest/SUBMISSION_CHECKLIST.md)，开源发布不等于已经完成赛事报名。

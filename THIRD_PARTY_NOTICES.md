@@ -5,4 +5,4 @@
 - wasm-tools 1.263.0: external official reference tool, not included in the repository. The downloaded distribution retains its upstream Apache-2.0, MIT and LLVM-exception license files.
 - moon-component was reviewed during feasibility research but is not a project build dependency.
 
-No third-party source checkout, compiler or reference binary is redistributed here. The project itself has not selected an open-source license.
+No third-party source checkout, compiler or reference binary is redistributed here. WITProbe's own code and documentation are licensed under MIT; see [LICENSE](LICENSE). Third-party material, including the copied Apache-2.0 license text, remains under its original license and is not relicensed by WITProbe.
