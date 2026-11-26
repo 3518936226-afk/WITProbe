@@ -1,0 +1,10 @@
+package demo:calculator@1.0.0;
+
+interface calculator {
+    use demo:common/types@1.0.0.{number};
+    add: func(a: number, b: number) -> number;
+}
+
+world calculator-world {
+    export calculator;
+}
