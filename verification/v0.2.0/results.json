@@ -1,0 +1,669 @@
+{
+  "version": "0.2.0",
+  "date": "2026-11-26",
+  "rule_set_version": "value-sync-v2",
+  "report_schema": 2,
+  "ir_schema": 1,
+  "analysis": {
+    "total": 33,
+    "passed": 33
+  },
+  "parser_integration": {
+    "total": 13,
+    "passed": 13
+  },
+  "upstream_parser": {
+    "total": 113,
+    "passed": 113
+  },
+  "integration": {
+    "status": "PASS",
+    "total": 32,
+    "passed": 32,
+    "tests": [
+      {
+        "name": "provider accepts added export and reports member path",
+        "status": "PASS"
+      },
+      {
+        "name": "consumer rejects added requirement and identifies actual/expected",
+        "status": "PASS"
+      },
+      {
+        "name": "type change finds exact parameters and result",
+        "status": "PASS"
+      },
+      {
+        "name": "public unused record containing a resource produces unknown reason and action",
+        "status": "PASS"
+      },
+      {
+        "name": "real CLI exit 0: compatible",
+        "status": "PASS"
+      },
+      {
+        "name": "real CLI exit 1: breaking",
+        "status": "PASS"
+      },
+      {
+        "name": "real CLI exit 3: unknown",
+        "status": "PASS"
+      },
+      {
+        "name": "real CLI exit 2: invalid input",
+        "status": "PASS"
+      },
+      {
+        "name": "missing world is an input error",
+        "status": "PASS"
+      },
+      {
+        "name": "missing and duplicate options are rejected",
+        "status": "PASS"
+      },
+      {
+        "name": "independent processes give identical semantic hashes",
+        "status": "PASS"
+      },
+      {
+        "name": "JSON and Markdown are generated from the same findings",
+        "status": "PASS"
+      },
+      {
+        "name": "baseline creation records source, semantic and rule identities",
+        "status": "PASS"
+      },
+      {
+        "name": "baseline overwrite is refused",
+        "status": "PASS"
+      },
+      {
+        "name": "regression leaves every baseline file unchanged",
+        "status": "PASS"
+      },
+      {
+        "name": "comments distinguish source changes from contract changes",
+        "status": "PASS"
+      },
+      {
+        "name": "signature changes distinguish semantic changes",
+        "status": "PASS"
+      },
+      {
+        "name": "modified baseline sources are rejected",
+        "status": "PASS"
+      },
+      {
+        "name": "modified baseline IR is rejected",
+        "status": "PASS"
+      },
+      {
+        "name": "changed rule version requires explicit migration",
+        "status": "PASS"
+      },
+      {
+        "name": "changed parser pin requires explicit migration",
+        "status": "PASS"
+      },
+      {
+        "name": "C-drive output is refused before any creation",
+        "status": "PASS"
+      },
+      {
+        "name": "regression CLI blocks a breaking change with exit 1",
+        "status": "PASS"
+      },
+      {
+        "name": "report output overwrite is refused",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential export-added provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential export-added consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential import-added provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential import-added consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential export-removed provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential export-removed consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential import-removed provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "official differential import-removed consumer-upgrade",
+        "status": "PASS"
+      }
+    ]
+  },
+  "value_types": {
+    "status": "PASS",
+    "total": 60,
+    "passed": 60,
+    "official_differential": 38,
+    "tests": [
+      {
+        "name": "list provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "list consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "list unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "option provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "option consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "option unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-order provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-order consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-order unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-arity provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-arity consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "tuple-arity unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "result-ok provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-ok consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-ok unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "result-err provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-err consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-err unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "result-empty provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-empty consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-empty unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "result-branches provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-branches consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "result-branches unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "record-order provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-order consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-order unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "record-field provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-field consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-field unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "record-add provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-add consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "record-add unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-payload provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-payload consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-payload unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-order provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-order consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-order unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-add provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-add consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "variant-add unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-order provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-order consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-order unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-add provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-add consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "enum-add unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-order provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-order consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-order unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-add provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-add consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "flags-add unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "nested provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "nested consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "nested unchanged shape",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI summary keeps exact counts and bounded details",
+        "status": "PASS"
+      },
+      {
+        "name": "summary and full Markdown expose accurate truncation and complete details",
+        "status": "PASS"
+      },
+      {
+        "name": "legacy scalar baseline requires explicit migration",
+        "status": "PASS"
+      }
+    ]
+  },
+  "real_projects": {
+    "status": "PASS",
+    "total": 27,
+    "passed": 27,
+    "corpus": "<external-corpus>",
+    "source_manifest": [
+      {
+        "label": "wasi-cli-v0.2.0",
+        "repository": "https://github.com/WebAssembly/wasi-cli",
+        "commit": "6ae82617096e83e6606047736e84ac397b788631",
+        "archive_sha256": "5c5e4397e0586b9532454cdb94826e2a34b9873ebe8a42b60cf29f8c722cd28d"
+      },
+      {
+        "label": "wasi-cli-v0.2.1",
+        "repository": "https://github.com/WebAssembly/wasi-cli",
+        "commit": "0598519dac2e46db4f3671bcb90f284919ea6e0e",
+        "archive_sha256": "070ae9ecd724fb836f3bc58294c526b8ff67d07f08b716cd8e5677e1dbae02be"
+      },
+      {
+        "label": "wasi-random-v0.2.0",
+        "repository": "https://github.com/WebAssembly/wasi-random",
+        "commit": "10ba8d44f22a1dd605c937f687013c90b5fec942",
+        "archive_sha256": "26702a5bd31e198b5a735e3dc796cc9f4790e725f8386c88193456b42f35c1ad"
+      },
+      {
+        "label": "wasi-random-v0.2.1",
+        "repository": "https://github.com/WebAssembly/wasi-random",
+        "commit": "e896b4b1cae527474d4413cd38d1eb63341f127b",
+        "archive_sha256": "8b40e911c3c284839e925e49d7da036885ed406dc472a6ee0d1db56ab842c409"
+      }
+    ],
+    "metrics": [
+      {
+        "project": "random",
+        "status": "COMPATIBLE",
+        "exit": 0,
+        "findings": 0,
+        "groups": [],
+        "summary_bytes": 1635,
+        "full_bytes": 9193,
+        "elapsed_ms": 962
+      },
+      {
+        "project": "cli",
+        "status": "UNKNOWN",
+        "exit": 3,
+        "findings": 579,
+        "groups": [
+          {
+            "status": "UNKNOWN",
+            "rule_id": "UNSUPPORTED_RESOURCE",
+            "count": 374,
+            "sample_symbols": [
+              "new/import/interface:wasi:io/error@0.2.1/type/error",
+              "old/import/interface:wasi:io/error@0.2.0/type/error",
+              "new/import/interface:wasi:cli/stdin/type/input-stream"
+            ],
+            "action": "Review nominal resource identity, ownership and lifecycle; these are not covered by the value-type rules."
+          },
+          {
+            "status": "UNKNOWN",
+            "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+            "count": 17,
+            "sample_symbols": [
+              "import/interface:wasi:io/poll@0.2.1",
+              "import/interface:wasi:io/error@0.2.1",
+              "import/interface:wasi:io/streams@0.2.1"
+            ],
+            "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+          },
+          {
+            "status": "UNKNOWN",
+            "rule_id": "UNSUPPORTED_RESOURCE_OR_ACCESSOR",
+            "count": 188,
+            "sample_symbols": [
+              "new/import/interface:wasi:io/poll@0.2.1/function/[method]pollable.block",
+              "new/import/interface:wasi:io/poll@0.2.1/function/[method]pollable.ready",
+              "old/import/interface:wasi:io/poll@0.2.0/function/[method]pollable.block"
+            ],
+            "action": "Review nominal resource identity, ownership and lifecycle; these are not covered by the value-type rules."
+          }
+        ],
+        "summary_bytes": 19944,
+        "full_bytes": 1305784,
+        "elapsed_ms": 1019
+      }
+    ],
+    "remote_ci": "NOT_RUN",
+    "native": "NOT_RUN",
+    "tests": [
+      {
+        "name": "random 0.2.0 official parse",
+        "status": "PASS"
+      },
+      {
+        "name": "random 0.2.0 unchanged real World",
+        "status": "PASS"
+      },
+      {
+        "name": "random 0.2.1 official parse",
+        "status": "PASS"
+      },
+      {
+        "name": "random 0.2.1 unchanged real World",
+        "status": "PASS"
+      },
+      {
+        "name": "random reference release pair provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "random release pair provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "random reference release pair consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "random release pair consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "random baseline/regression integrity",
+        "status": "PASS"
+      },
+      {
+        "name": "random actual local gate exit",
+        "status": "PASS"
+      },
+      {
+        "name": "random real summary/full report parity",
+        "status": "PASS"
+      },
+      {
+        "name": "cli 0.2.0 official parse",
+        "status": "PASS"
+      },
+      {
+        "name": "cli 0.2.0 unchanged real World",
+        "status": "PASS"
+      },
+      {
+        "name": "cli 0.2.1 official parse",
+        "status": "PASS"
+      },
+      {
+        "name": "cli 0.2.1 unchanged real World",
+        "status": "PASS"
+      },
+      {
+        "name": "cli reference release pair provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "cli release pair provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "cli reference release pair consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "cli release pair consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "cli baseline/regression integrity",
+        "status": "PASS"
+      },
+      {
+        "name": "cli actual local gate exit",
+        "status": "PASS"
+      },
+      {
+        "name": "cli real summary/full report parity",
+        "status": "PASS"
+      },
+      {
+        "name": "real list-payload change provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "real list-payload change consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "real tuple-payload change provider-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "real tuple-payload change consumer-upgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "all original upstream source bytes preserved",
+        "status": "PASS"
+      }
+    ]
+  },
+  "mutations": {
+    "status": "PASS",
+    "mutants": [
+      {
+        "name": "reverse-direction",
+        "status": "KILLED",
+        "exit_code": 2,
+        "total_tests": 33,
+        "failed_tests": 8,
+        "error": null,
+        "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\reverse-direction"
+      },
+      {
+        "name": "ignore-scalar-change",
+        "status": "KILLED",
+        "exit_code": 2,
+        "total_tests": 33,
+        "failed_tests": 8,
+        "error": null,
+        "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\ignore-scalar-change"
+      },
+      {
+        "name": "swallow-unknown",
+        "status": "KILLED",
+        "exit_code": 2,
+        "total_tests": 33,
+        "failed_tests": 6,
+        "error": null,
+        "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\swallow-unknown"
+      }
+    ]
+  },
+  "validation": {
+    "status": "PASS",
+    "directory": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d",
+    "stages": [
+      {
+        "status": "PASS",
+        "stage": "parser"
+      },
+      {
+        "status": "PASS",
+        "stage": "analysis"
+      },
+      {
+        "status": "PASS",
+        "stage": "integration"
+      },
+      {
+        "status": "PASS",
+        "stage": "value-types"
+      },
+      {
+        "status": "PASS",
+        "stage": "real-projects"
+      },
+      {
+        "status": "PASS",
+        "stage": "mutations"
+      }
+    ],
+    "remote_ci": "NOT_RUN",
+    "native": "NOT_RUN"
+  },
+  "remote_ci": "NOT_RUN",
+  "native": "NOT_RUN",
+  "controlled_C_drive_write_bytes": 0
+}

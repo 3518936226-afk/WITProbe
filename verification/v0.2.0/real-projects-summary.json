@@ -1,0 +1,200 @@
+{
+  "status": "PASS",
+  "total": 27,
+  "passed": 27,
+  "corpus": "<external-corpus>",
+  "source_manifest": [
+    {
+      "label": "wasi-cli-v0.2.0",
+      "repository": "https://github.com/WebAssembly/wasi-cli",
+      "commit": "6ae82617096e83e6606047736e84ac397b788631",
+      "archive_sha256": "5c5e4397e0586b9532454cdb94826e2a34b9873ebe8a42b60cf29f8c722cd28d"
+    },
+    {
+      "label": "wasi-cli-v0.2.1",
+      "repository": "https://github.com/WebAssembly/wasi-cli",
+      "commit": "0598519dac2e46db4f3671bcb90f284919ea6e0e",
+      "archive_sha256": "070ae9ecd724fb836f3bc58294c526b8ff67d07f08b716cd8e5677e1dbae02be"
+    },
+    {
+      "label": "wasi-random-v0.2.0",
+      "repository": "https://github.com/WebAssembly/wasi-random",
+      "commit": "10ba8d44f22a1dd605c937f687013c90b5fec942",
+      "archive_sha256": "26702a5bd31e198b5a735e3dc796cc9f4790e725f8386c88193456b42f35c1ad"
+    },
+    {
+      "label": "wasi-random-v0.2.1",
+      "repository": "https://github.com/WebAssembly/wasi-random",
+      "commit": "e896b4b1cae527474d4413cd38d1eb63341f127b",
+      "archive_sha256": "8b40e911c3c284839e925e49d7da036885ed406dc472a6ee0d1db56ab842c409"
+    }
+  ],
+  "metrics": [
+    {
+      "project": "random",
+      "status": "COMPATIBLE",
+      "exit": 0,
+      "findings": 0,
+      "groups": [],
+      "summary_bytes": 1635,
+      "full_bytes": 9193,
+      "elapsed_ms": 962
+    },
+    {
+      "project": "cli",
+      "status": "UNKNOWN",
+      "exit": 3,
+      "findings": 579,
+      "groups": [
+        {
+          "status": "UNKNOWN",
+          "rule_id": "UNSUPPORTED_RESOURCE",
+          "count": 374,
+          "sample_symbols": [
+            "new/import/interface:wasi:io/error@0.2.1/type/error",
+            "old/import/interface:wasi:io/error@0.2.0/type/error",
+            "new/import/interface:wasi:cli/stdin/type/input-stream"
+          ],
+          "action": "Review nominal resource identity, ownership and lifecycle; these are not covered by the value-type rules."
+        },
+        {
+          "status": "UNKNOWN",
+          "rule_id": "UNMAPPED_DEPENDENCY_VERSION",
+          "count": 17,
+          "sample_symbols": [
+            "import/interface:wasi:io/poll@0.2.1",
+            "import/interface:wasi:io/error@0.2.1",
+            "import/interface:wasi:io/streams@0.2.1"
+          ],
+          "action": "Review the dependency identity mapping explicitly; package versions are not erased automatically."
+        },
+        {
+          "status": "UNKNOWN",
+          "rule_id": "UNSUPPORTED_RESOURCE_OR_ACCESSOR",
+          "count": 188,
+          "sample_symbols": [
+            "new/import/interface:wasi:io/poll@0.2.1/function/[method]pollable.block",
+            "new/import/interface:wasi:io/poll@0.2.1/function/[method]pollable.ready",
+            "old/import/interface:wasi:io/poll@0.2.0/function/[method]pollable.block"
+          ],
+          "action": "Review nominal resource identity, ownership and lifecycle; these are not covered by the value-type rules."
+        }
+      ],
+      "summary_bytes": 19944,
+      "full_bytes": 1305784,
+      "elapsed_ms": 1019
+    }
+  ],
+  "remote_ci": "NOT_RUN",
+  "native": "NOT_RUN",
+  "tests": [
+    {
+      "name": "random 0.2.0 official parse",
+      "status": "PASS"
+    },
+    {
+      "name": "random 0.2.0 unchanged real World",
+      "status": "PASS"
+    },
+    {
+      "name": "random 0.2.1 official parse",
+      "status": "PASS"
+    },
+    {
+      "name": "random 0.2.1 unchanged real World",
+      "status": "PASS"
+    },
+    {
+      "name": "random reference release pair provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "random release pair provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "random reference release pair consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "random release pair consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "random baseline/regression integrity",
+      "status": "PASS"
+    },
+    {
+      "name": "random actual local gate exit",
+      "status": "PASS"
+    },
+    {
+      "name": "random real summary/full report parity",
+      "status": "PASS"
+    },
+    {
+      "name": "cli 0.2.0 official parse",
+      "status": "PASS"
+    },
+    {
+      "name": "cli 0.2.0 unchanged real World",
+      "status": "PASS"
+    },
+    {
+      "name": "cli 0.2.1 official parse",
+      "status": "PASS"
+    },
+    {
+      "name": "cli 0.2.1 unchanged real World",
+      "status": "PASS"
+    },
+    {
+      "name": "cli reference release pair provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "cli release pair provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "cli reference release pair consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "cli release pair consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "cli baseline/regression integrity",
+      "status": "PASS"
+    },
+    {
+      "name": "cli actual local gate exit",
+      "status": "PASS"
+    },
+    {
+      "name": "cli real summary/full report parity",
+      "status": "PASS"
+    },
+    {
+      "name": "real list-payload change provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "real list-payload change consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "real tuple-payload change provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "real tuple-payload change consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "all original upstream source bytes preserved",
+      "status": "PASS"
+    }
+  ]
+}

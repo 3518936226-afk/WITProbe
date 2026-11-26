@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "controlled mutation of real Random source; not an upstream release",
+    "label": "list-payload",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:random/random/function/get-random-bytes/result",
+        "reason": "Required type list:u16 is supplied as list:u8.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "reference_exit": 1,
+    "reference_stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `imports`\n       type mismatch for import `wasi:random/random`\n       type mismatch in instance export `get-random-bytes`\n       type mismatch with result type\n       expected primitive `u16` found primitive `u8` (at offset 0xb05)\n"
+  },
+  {
+    "kind": "controlled mutation of real Random source; not an upstream release",
+    "label": "list-payload",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:random/random/function/get-random-bytes/result",
+        "reason": "Required type list:u8 is supplied as list:u16.",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "reference_exit": 1,
+    "reference_stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `imports`\n       type mismatch for import `wasi:random/random`\n       type mismatch in instance export `get-random-bytes`\n       type mismatch with result type\n       expected primitive `u8` found primitive `u16` (at offset 0xb05)\n"
+  },
+  {
+    "kind": "controlled mutation of real Random source; not an upstream release",
+    "label": "tuple-payload",
+    "direction": "provider-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:random/insecure-seed/function/insecure-seed/result",
+        "reason": "Required type tuple:[\"u32\",\"u64\"] is supplied as tuple:[\"u64\",\"u64\"].",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "reference_exit": 1,
+    "reference_stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `imports`\n       type mismatch for import `wasi:random/insecure-seed`\n       type mismatch in instance export `insecure-seed`\n       type mismatch with result type\n       type mismatch in tuple field 0\n       expected primitive `u32` found primitive `u64` (at offset 0xb05)\n"
+  },
+  {
+    "kind": "controlled mutation of real Random source; not an upstream release",
+    "label": "tuple-payload",
+    "direction": "consumer-upgrade",
+    "status": "BREAKING",
+    "exit": 1,
+    "findings": [
+      {
+        "status": "BREAKING",
+        "rule_id": "TYPE_CHANGED",
+        "symbol": "import/interface:wasi:random/insecure-seed/function/insecure-seed/result",
+        "reason": "Required type tuple:[\"u64\",\"u64\"] is supplied as tuple:[\"u32\",\"u64\"].",
+        "action": "Restore the required contract or migrate the dependent party explicitly."
+      }
+    ],
+    "reference_exit": 1,
+    "reference_stderr": "error: new world is not semver-compatible with the previous world\n\nCaused by:\n    0: type mismatch for import `imports`\n       type mismatch for import `wasi:random/insecure-seed`\n       type mismatch in instance export `insecure-seed`\n       type mismatch with result type\n       type mismatch in tuple field 0\n       expected primitive `u64` found primitive `u32` (at offset 0xb05)\n"
+  }
+]

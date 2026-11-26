@@ -1,0 +1,374 @@
+{
+  "schema_version": 2,
+  "rule_set_version": "value-sync-v2",
+  "analysis_scope": "structural",
+  "direction": "consumer-upgrade",
+  "actual_side": "old",
+  "expected_side": "new",
+  "status": "COMPATIBLE",
+  "exit_code": 0,
+  "old_contract": {
+    "schema_version": 1,
+    "root_identity": "wasi:random",
+    "source_version": "0.2.0",
+    "world": "imports",
+    "imports": [
+      {
+        "key": "interface:wasi:random/random",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-insecure-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-insecure-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure-seed",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "insecure-seed",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "tuple:[\"u64\",\"u64\"]"
+            }
+          }
+        ],
+        "types": []
+      }
+    ],
+    "exports": []
+  },
+  "new_contract": {
+    "schema_version": 1,
+    "root_identity": "wasi:random",
+    "source_version": "0.2.1",
+    "world": "imports",
+    "imports": [
+      {
+        "key": "interface:wasi:random/random",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-insecure-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-insecure-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure-seed",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "insecure-seed",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "tuple:[\"u64\",\"u64\"]"
+            }
+          }
+        ],
+        "types": []
+      }
+    ],
+    "exports": []
+  },
+  "changes": [],
+  "findings": [],
+  "detail": "full",
+  "old_semantic_contract": {
+    "schema_version": 1,
+    "root_identity": "wasi:random",
+    "world": "imports",
+    "imports": [
+      {
+        "key": "interface:wasi:random/random",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-insecure-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-insecure-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure-seed",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "insecure-seed",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "tuple:[\"u64\",\"u64\"]"
+            }
+          }
+        ],
+        "types": []
+      }
+    ],
+    "exports": []
+  },
+  "new_semantic_contract": {
+    "schema_version": 1,
+    "root_identity": "wasi:random",
+    "world": "imports",
+    "imports": [
+      {
+        "key": "interface:wasi:random/random",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "get-insecure-random-u64",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "u64"
+            }
+          },
+          {
+            "name": "get-insecure-random-bytes",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "len",
+                "ty": {
+                  "shape": "u64"
+                }
+              }
+            ],
+            "result": {
+              "shape": "list:u8"
+            }
+          }
+        ],
+        "types": []
+      },
+      {
+        "key": "interface:wasi:random/insecure-seed",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "insecure-seed",
+            "kind": "freestanding",
+            "params": [],
+            "result": {
+              "shape": "tuple:[\"u64\",\"u64\"]"
+            }
+          }
+        ],
+        "types": []
+      }
+    ],
+    "exports": []
+  },
+  "summary": {
+    "finding_count": 0,
+    "breaking_count": 0,
+    "unknown_count": 0,
+    "error_count": 0,
+    "change_count": 0,
+    "groups": []
+  },
+  "markdown": "# WITProbe compatibility report\n\nStatus: COMPATIBLE\nDirection: consumer-upgrade\nActual provider: old\nExpected contract/environment: new\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: value-sync-v2\n\n## Summary\n\nFindings: 0; breaking: 0; unknown: 0; errors: 0; changes: 0.\n\n## Findings\n\nAll obligations in the supported synchronous value-type scope are satisfied.\n\n## Changes\n\nNo selected-world contract changes.\n",
+  "summary_markdown": "# WITProbe compatibility report\n\nStatus: COMPATIBLE\nDirection: consumer-upgrade\nActual provider: old\nExpected contract/environment: new\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: value-sync-v2\n\n## Summary\n\nFindings: 0; breaking: 0; unknown: 0; errors: 0; changes: 0.\n\n## Findings\n\nAll obligations in the supported synchronous value-type scope are satisfied.\n\n## Changes\n\nNo selected-world contract changes.\n",
+  "parser": {
+    "module": "mizchi/wit",
+    "version": "0.4.1",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec"
+  },
+  "parse_options": {
+    "features": [],
+    "all_features": false,
+    "target_version": null
+  },
+  "identity_mapping": {
+    "root_package": "wasi:random",
+    "old_version": "0.2.0",
+    "new_version": "0.2.1"
+  },
+  "old_semantic_hash": "d81ebc13193a488ee47e2a4c41aeaf44b689fe6670d0d4af8557c6e029c25f8e",
+  "new_semantic_hash": "d81ebc13193a488ee47e2a4c41aeaf44b689fe6670d0d4af8557c6e029c25f8e"
+}

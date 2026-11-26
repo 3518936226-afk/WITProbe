@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "total": 60,
+  "passed": 60,
+  "official_differential": 38,
+  "tests": [
+    {
+      "name": "list provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "list consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "list unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "option provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "option consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "option unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-order provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-order consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-order unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-arity provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-arity consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "tuple-arity unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "result-ok provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-ok consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-ok unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "result-err provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-err consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-err unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "result-empty provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-empty consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-empty unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "result-branches provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-branches consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "result-branches unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "record-order provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-order consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-order unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "record-field provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-field consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-field unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "record-add provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-add consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "record-add unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-payload provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-payload consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-payload unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-order provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-order consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-order unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-add provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-add consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "variant-add unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-order provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-order consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-order unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-add provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-add consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "enum-add unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-order provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-order consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-order unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-add provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-add consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "flags-add unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "nested provider-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "nested consumer-upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "nested unchanged shape",
+      "status": "PASS"
+    },
+    {
+      "name": "CLI summary keeps exact counts and bounded details",
+      "status": "PASS"
+    },
+    {
+      "name": "summary and full Markdown expose accurate truncation and complete details",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy scalar baseline requires explicit migration",
+      "status": "PASS"
+    }
+  ]
+}

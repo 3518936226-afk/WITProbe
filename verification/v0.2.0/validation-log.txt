@@ -1,0 +1,24 @@
+[PREPARE]
+Finished. moon: ran 8 tasks, now up to date
+Prepared pinned parser, reference tool and local configuration. Nothing was installed to C:.
+
+[PARSER]
+PASS: integration 13/13; upstream 113/113.
+Summary: <workspace>\evidence\product-runs\20261126T155056015Z-2f62c37d\parser\summary.json
+Native: not run; historical failure is recorded separately.
+
+[ANALYSIS]
+Total tests: 33, passed: 33, failed: 0.
+
+[INTEGRATION]
+Product integration: 32/32; <workspace>\evidence\product-runs\20261126T155056015Z-2f62c37d\integration
+
+[VALUE TYPES]
+Value-type/report checks: 60/60; official differential 38; <workspace>\evidence\product-runs\20261126T155056015Z-2f62c37d\value-types
+
+[REAL PROJECTS]
+Real-project checks: 27/27; <workspace>\evidence\product-runs\20261126T155056015Z-2f62c37d\real-projects
+
+[MUTATIONS]
+Mutation validation: 3/3 killed; <workspace>\evidence\product-runs\20261126T155056015Z-2f62c37d\mutations
+

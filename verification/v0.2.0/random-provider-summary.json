@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "rule_set_version": "value-sync-v2",
+  "analysis_scope": "structural",
+  "direction": "provider-upgrade",
+  "actual_side": "new",
+  "expected_side": "old",
+  "status": "COMPATIBLE",
+  "exit_code": 0,
+  "changes": [],
+  "findings": [],
+  "detail": "summary",
+  "summary": {
+    "finding_count": 0,
+    "breaking_count": 0,
+    "unknown_count": 0,
+    "error_count": 0,
+    "change_count": 0,
+    "groups": []
+  },
+  "markdown": "# WITProbe compatibility report\n\nStatus: COMPATIBLE\nDirection: provider-upgrade\nActual provider: new\nExpected contract/environment: old\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: value-sync-v2\n\n## Summary\n\nFindings: 0; breaking: 0; unknown: 0; errors: 0; changes: 0.\n\n## Findings\n\nAll obligations in the supported synchronous value-type scope are satisfied.\n\n## Changes\n\nNo selected-world contract changes.\n",
+  "parser": {
+    "module": "mizchi/wit",
+    "version": "0.4.1",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec"
+  },
+  "parse_options": {
+    "features": [],
+    "all_features": false,
+    "target_version": null
+  },
+  "identity_mapping": {
+    "root_package": "wasi:random",
+    "old_version": "0.2.0",
+    "new_version": "0.2.1"
+  },
+  "old_semantic_hash": "d81ebc13193a488ee47e2a4c41aeaf44b689fe6670d0d4af8557c6e029c25f8e",
+  "new_semantic_hash": "d81ebc13193a488ee47e2a4c41aeaf44b689fe6670d0d4af8557c6e029c25f8e",
+  "findings_truncated": false,
+  "changes_truncated": false,
+  "full_report_hint": "Rerun with --detail full to retain all findings, definitions and IR."
+}

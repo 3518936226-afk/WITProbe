@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "mutants": [
+    {
+      "name": "reverse-direction",
+      "status": "KILLED",
+      "exit_code": 2,
+      "total_tests": 33,
+      "failed_tests": 8,
+      "error": null,
+      "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\reverse-direction"
+    },
+    {
+      "name": "ignore-scalar-change",
+      "status": "KILLED",
+      "exit_code": 2,
+      "total_tests": 33,
+      "failed_tests": 8,
+      "error": null,
+      "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\ignore-scalar-change"
+    },
+    {
+      "name": "swallow-unknown",
+      "status": "KILLED",
+      "exit_code": 2,
+      "total_tests": 33,
+      "failed_tests": 6,
+      "error": null,
+      "project": "<workspace>\\evidence\\product-runs\\20261126T155056015Z-2f62c37d\\mutations\\swallow-unknown"
+    }
+  ]
+}
