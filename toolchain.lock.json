@@ -1,0 +1,26 @@
+{
+  "verified_date": "2026-11-26",
+  "stage": "phase1-parser-feasibility",
+  "moon": "0.1.20261119 (738607b 2026-11-19)",
+  "moonc": "v0.10.22+124d61d05 (2026-11-19)",
+  "wit": {
+    "module": "mizchi/wit",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec",
+    "version": "0.4.1",
+    "repository": "https://github.com/mizchi/wit.mbt"
+  },
+  "moonbitlang_x": "0.5.4",
+  "moon_component_research_only": {
+    "version": "0.5.4",
+    "commit": "67741d56c1f87007253708165834d3f9c98867f4"
+  },
+  "wasm_tools": {
+    "version": "1.263.0",
+    "archive_sha256": "0803df158b4dbea6b029d11f4206c414f432f0447af91542817061e4f0bd912e",
+    "asset_url": "https://github.com/bytecodealliance/wasm-tools/releases/download/v1.263.0/wasm-tools-1.263.0-x86_64-windows.zip",
+    "executable_sha256": "3be416990124225fb4b683c8add1d910ea5bccb67de0963dab13a5599b685829"
+  },
+  "node": "v24.20.0",
+  "python": "Python 3.14.4",
+  "native_status": "BUILD_FAILED: selected MinGW; Windows runtime requires MSVC"
+}

@@ -1,0 +1,12 @@
+_build/
+work/
+.mooncakes/
+evidence/
+toolchain.local.json
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
