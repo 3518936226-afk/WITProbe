@@ -99,11 +99,11 @@ test "public unused scalar type removal is breaking" {
 }
 
 ///|
-test "public unused record stays unknown even without function use" {
-  let a = "package demo:test; interface api { record item { id: u32 } } world app { export api; }"
+test "public unused record containing resource stays unknown" {
+  let a = "package demo:test; interface api { resource handle; record item { value: own<handle> } } world app { export api; }"
   let r = analyze(a, a, "provider-upgrade")
   assert_eq(r.status, "UNKNOWN")
-  assert_true(r.findings.any(fn(f) { f.rule_id == "UNSUPPORTED_COMPOSITE" }))
+  assert_true(r.findings.any(fn(f) { f.rule_id == "UNSUPPORTED_RESOURCE" }))
 }
 
 ///|
@@ -242,10 +242,10 @@ test "scalar alias normalization is stable" {
 }
 
 ///|
-test "unsupported record member ordering is retained" {
+test "record member ordering change is breaking" {
   let a = "package demo:test; interface api { record item { a: u32, b: string } } world app { export api; }"
   let b = "package demo:test; interface api { record item { b: string, a: u32 } } world app { export api; }"
   let r = analyze(a, b, "provider-upgrade")
-  assert_eq(r.status, "UNKNOWN")
+  assert_eq(r.status, "BREAKING")
   assert_true(r.old_contract.semantic_json() != r.new_contract.semantic_json())
 }

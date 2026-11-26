@@ -62,6 +62,22 @@ fn unsupported(shape : String, code : String) -> @contract.TypeDesc {
 }
 
 ///|
+// A container is proven only when every nested type is proven. In particular,
+// an equal-looking resource/future must not become compatible inside a list.
+fn composite(
+  shape : String,
+  children : Array[@contract.TypeDesc],
+) -> @contract.TypeDesc {
+  let mut unsupported = None
+  for child in children {
+    if unsupported is None {
+      unsupported = child.unsupported
+    }
+  }
+  { shape, unsupported, }
+}
+
+///|
 fn describe(
   r : @wit.Resolve,
   ty : @wit.RType,
@@ -229,8 +245,8 @@ pub fn from_source(
 ///|
 pub fn error_json(code : String, message : String, direction : String) -> Json {
   Json::object({
-    "schema_version": @json.ToJson::to_json(1),
-    "rule_set_version": @json.ToJson::to_json("scalar-sync-v1"),
+    "schema_version": @json.ToJson::to_json(2),
+    "rule_set_version": @json.ToJson::to_json("value-sync-v2"),
     "status": @json.ToJson::to_json("ERROR"),
     "exit_code": @json.ToJson::to_json(2),
     "direction": @json.ToJson::to_json(direction),
@@ -284,41 +300,40 @@ fn describe_id(
       unsupported(shape, "UNSUPPORTED_RESOURCE")
     }
     Record(fields) => {
-      let shapes = fields.map(fn(f) {
-        (f.name, describe(r, f.field_type, root, depth + 1).shape)
+      let children = fields.map(fn(f) {
+        describe(r, f.field_type, root, depth + 1)
       })
-      unsupported(
-        "record:" + @json.ToJson::to_json(shapes).stringify(),
-        "UNSUPPORTED_COMPOSITE",
-      )
+      let shapes : Array[(String, String)] = []
+      for index = 0; index < fields.length(); index = index + 1 {
+        shapes.push((fields[index].name, children[index].shape))
+      }
+      composite("record:" + @json.ToJson::to_json(shapes).stringify(), children)
     }
     Variant(cases) => {
+      let children : Array[@contract.TypeDesc] = []
       let shapes = cases.map(fn(c) {
         (
           c.name,
-          c.case_type.map(fn(t) { describe(r, t, root, depth + 1).shape }),
+          c.case_type.map(fn(t) {
+            let child = describe(r, t, root, depth + 1)
+            children.push(child)
+            child.shape
+          }),
         )
       })
-      unsupported(
+      composite(
         "variant:" + @json.ToJson::to_json(shapes).stringify(),
-        "UNSUPPORTED_COMPOSITE",
+        children,
       )
     }
     Flags(names) =>
-      unsupported(
-        "flags:" + @json.ToJson::to_json(names).stringify(),
-        "UNSUPPORTED_COMPOSITE",
-      )
+      composite("flags:" + @json.ToJson::to_json(names).stringify(), [])
     Enum(names) =>
-      unsupported(
-        "enum:" + @json.ToJson::to_json(names).stringify(),
-        "UNSUPPORTED_COMPOSITE",
-      )
-    List(a) =>
-      unsupported(
-        "list:" + describe(r, a, root, depth + 1).shape,
-        "UNSUPPORTED_COMPOSITE",
-      )
+      composite("enum:" + @json.ToJson::to_json(names).stringify(), [])
+    List(a) => {
+      let child = describe(r, a, root, depth + 1)
+      composite("list:" + child.shape, [child])
+    }
     FixedLengthList(a, n) =>
       unsupported(
         "fixed-list:" +
@@ -338,30 +353,35 @@ fn describe_id(
         ).stringify(),
         "UNSUPPORTED_COMPOSITE",
       )
-    Option(a) =>
-      unsupported(
-        "option:" + describe(r, a, root, depth + 1).shape,
-        "UNSUPPORTED_COMPOSITE",
-      )
-    Tuple(items) =>
-      unsupported(
+    Option(a) => {
+      let child = describe(r, a, root, depth + 1)
+      composite("option:" + child.shape, [child])
+    }
+    Tuple(items) => {
+      let children = items.map(fn(t) { describe(r, t, root, depth + 1) })
+      composite(
         "tuple:" +
-        @json.ToJson::to_json(
-          items.map(fn(t) { describe(r, t, root, depth + 1).shape }),
-        ).stringify(),
-        "UNSUPPORTED_COMPOSITE",
+        @json.ToJson::to_json(children.map(fn(t) { t.shape })).stringify(),
+        children,
       )
-    Result(ok~, err~) =>
-      unsupported(
-        "result:" +
-        @json.ToJson::to_json(
-          (
-            ok.map(fn(t) { describe(r, t, root, depth + 1).shape }),
-            err.map(fn(t) { describe(r, t, root, depth + 1).shape }),
-          ),
-        ).stringify(),
-        "UNSUPPORTED_COMPOSITE",
+    }
+    Result(ok~, err~) => {
+      let children : Array[@contract.TypeDesc] = []
+      let ok_shape = ok.map(fn(t) {
+        let child = describe(r, t, root, depth + 1)
+        children.push(child)
+        child.shape
+      })
+      let err_shape = err.map(fn(t) {
+        let child = describe(r, t, root, depth + 1)
+        children.push(child)
+        child.shape
+      })
+      composite(
+        "result:" + @json.ToJson::to_json((ok_shape, err_shape)).stringify(),
+        children,
       )
+    }
     Future(a) =>
       unsupported(
         "future:" +
