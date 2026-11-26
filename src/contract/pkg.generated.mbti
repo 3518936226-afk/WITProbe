@@ -1,0 +1,101 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "local/witprobe/contract"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn compare(Contract, Contract, String) -> Report
+
+// Errors
+
+// Types and methods
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Change {
+  kind : String
+  symbol : String
+  old_definition : String?
+  new_definition : String?
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Contract {
+  schema_version : Int32
+  root_identity : String
+  source_version : String?
+  world : String
+  imports : Array[Edge]
+  exports : Array[Edge]
+}
+pub fn Contract::semantic_json(Self) -> @json.Json
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Edge {
+  key : String
+  kind : String
+  functions : Array[Function]
+  types : Array[PublicType]
+  unsupported : String?
+  external_id : String?
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Finding {
+  status : String
+  rule_id : String
+  symbol : String
+  reason : String
+  action : String
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Function {
+  name : String
+  kind : String
+  params : Array[Parameter]
+  result : TypeDesc?
+  unsupported : String?
+  external_id : String?
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Parameter {
+  name : String
+  ty : TypeDesc
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct PublicType {
+  name : String
+  ty : TypeDesc
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct Report {
+  schema_version : Int32
+  rule_set_version : String
+  analysis_scope : String
+  direction : String
+  actual_side : String
+  expected_side : String
+  status : String
+  exit_code : Int32
+  old_contract : Contract
+  new_contract : Contract
+  changes : Array[Change]
+  findings : Array[Finding]
+}
+pub fn Report::json(Self) -> @json.Json
+pub fn Report::markdown(Self) -> String
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct TypeDesc {
+  shape : String
+  unsupported : String?
+}
+
+// Type aliases
+
+// Traits
