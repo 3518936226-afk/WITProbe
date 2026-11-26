@@ -1,30 +1,36 @@
-# WITProbe 0.2.0 verification status
+# WITProbe 0.3.0 verification status
 
-Recorded 2026-11-26 from the updated owning project, with a freshly downloaded and hash-verified external corpus.
+Recorded 2026-11-27. Rules: resource-sync-v3; Report Schema 2; IR/baseline metadata Schema 1.
 
 | Suite | Result |
 |---|---|
-| MoonBit analysis | 33/33 |
-| Product integration | 32/32, including 8 official direction comparisons |
-| Value types and report completeness | 60/60, including 38 additional official comparisons |
-| Real-project checks | 27/27 expected outcomes; this includes deliberately retained UNKNOWN |
-| Mutation detection | 3/3 caught; reversed direction 8 failures, ignored type changes 8, swallowed UNKNOWN 6 |
-| Parser integration / upstream | 13/13 and 113/113, recorded separately |
+| MoonBit analysis | 40/40 |
+| Product integration | 32/32 (8 official direction comparisons included) |
+| Value types / reports | 60/60 (38 official comparisons included) |
+| Resources / mapping validation | 66/66 (36 official comparisons included) |
+| Real projects | 31/31 expected outcomes, including deliberately retained UNKNOWN |
+| Real WASI CLI resource breaks | 9/9 (8 official comparisons included) |
+| Mutations | 4/4 caught; direction 9 failures, ignored types 10, swallowed UNKNOWN 5, erased resource identity 4 |
+| Parser integration / upstream | 13/13 and 113/113, counted separately |
 
-## Real-project results
+## WASI CLI
 
-Official WASI Random v0.2.0 → v0.2.1, World imports: COMPATIBLE in both directions, no findings. The earlier scalar-only implementation returned UNKNOWN. Controlled List and Tuple payload changes in separate real-source copies are BREAKING in both directions, matching the fixed official tool. These injected changes are not upstream releases or upstream bugs.
+- Original v0.2.0 and v0.2.1, World command, each compared to itself: COMPATIBLE / 0.
+- Release pair without a dependency map: UNKNOWN / 3; versions are not erased automatically.
+- With the explicit five-package map: COMPATIBLE / 0 in both directions, no findings, matching the fixed reference tool under the declared identity alignment.
+- Partial map: UNKNOWN / 3.
+- Mapped baseline regression and actual local gate: exit 0; baseline files unchanged.
+- Four controlled changes in independent v0.2.1 copies alter own/borrow, nominal resource identity, a method result, and a method name. All eight directional checks are BREAKING / 1, matching official reference checks.
+- A real value-sync-v2 baseline is rejected with BASELINE_RULE_VERSION_CHANGED / 2, preserving the old data.
 
-Official WASI CLI v0.2.0 → v0.2.1, World command: still UNKNOWN in both directions. A provider-upgrade report has 579 findings: 374 resource, 188 resource/accessor, 17 unmapped dependency version findings. Common value containers no longer produce UNSUPPORTED_COMPOSITE in this case. The reference tool accepts the release pair, while WITProbe intentionally has narrower resource/identity rules.
+The checked map declares clocks, filesystem, io, random and sockets from 0.2.0 to 0.2.1. Original IR and semantic hashes retain original versions. Full reports also retain the comparison projection; JSON/Markdown show the assumptions and JSON records a policy digest. Policy row order does not change the digest.
 
-For that CLI case, default JSON is **19,944 bytes**; current full JSON is **1,305,784 bytes**. The previous default was 1,510,227 bytes. Counts remain exact, previews are explicitly truncated, and --detail full retains complete findings, definitions and IR.
+WASI Random and previous List/Tuple break experiments remain covered. Test injections are not upstream releases or upstream bugs; original source bytes are preserved.
 
-Real baselines remain byte-for-byte unchanged after regression. The actual local gate allows the Random case with exit 0 and blocks the CLI UNKNOWN with exit 3. A real scalar-sync-v1 baseline is rejected with BASELINE_RULE_VERSION_CHANGED / 2 rather than silently migrated.
+## Evidence and limits
 
-## Evidence and remaining limits
+[Report](verification/v0.3.0/REPORT.md), [results](verification/v0.3.0/results.json), [mapped CLI](verification/v0.3.0/cli-mapped-provider-upgrade.json), [unmapped CLI](verification/v0.3.0/cli-unmapped.json), [real resource breaks](verification/v0.3.0/real-resource-breaks.json), [log](verification/v0.3.0/validation-log.txt), [mapping rules](RESOURCE_MAPPING.md).
 
-[Versioned results](verification/v0.2.0/results.json), [test log](verification/v0.2.0/validation-log.txt), [real-project results](verification/v0.2.0/real-projects-summary.json), [real type-break evidence](verification/v0.2.0/real-type-breaks.json), [CLI summary](verification/v0.2.0/cli-summary.md).
+Supported: synchronous value/resource contract structure, nominal origins and aliases, own/borrow, constructors/methods/statics, and explicit one-to-one same-package version mapping. Ambiguous/coexisting-version mappings are rejected. Async/accessor proposals, external/unresolved identities and additional container proposals remain conservative UNKNOWN.
 
-Supported: synchronous scalar/alias and common value-type structural equality. Resources, accessors, async, external identities, additional container proposals and unmapped dependency versions remain conservative UNKNOWN. Native, remote GitHub Actions, arbitrary-platform installation and real business-component ABI/runtime interoperability are NOT_RUN / unverified.
-
-Older plans and verification files describe earlier versions. Current reproduction commands are in README.md. Test runs use the existing pinned MoonBit toolchain; this was not a new-machine installation test.
+This does not execute destructors or prove runtime lifetime safety, actual resource instance identity or business behavior. Native, remote GitHub Actions and real business-component interoperability remain unverified. The existing pinned MoonBit toolchain was reused; this is not a new-machine installation test. Older plans and verification directories are historical.

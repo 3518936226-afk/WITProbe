@@ -1,6 +1,6 @@
 # WITProbe
 
-**MoonBit WIT 契约演进与回归检查原型，版本 0.2.0。**
+**MoonBit WIT 契约演进与回归检查原型，版本 0.3.0。**
 
 比较两个服务提供方 World，输出方向性兼容结论、Diff、规则编号和退出码。MoonBit 实现 IR、比较规则、报告及分组汇总，Node 标准库承载文件、SHA256、进程与 CLI。
 
@@ -9,10 +9,11 @@
 - 标量、别名、同步函数及 World Import/Export 约束。
 - List、Tuple、Option、Result、Record、Variant、Enum、Flags 及嵌套组合。
 - 已支持值类型要求相同结构，保留成员名、顺序、数量、分支有无与嵌套类型。
-- 含资源、句柄、异步或外部身份的类型仍保守返回 UNKNOWN；依赖版本不自动擦除。
+- 同步资源声明、own/borrow、构造器、方法和静态函数可检查；别名保留原始名义身份。
+- 依赖版本支持经校验的显式一对一映射；异步、访问器提案、外部身份与未映射版本仍保守处理。
 - Native、业务组件 ABI/运行时、完整 WIT 子类型及远程 GitHub Actions 尚未验收。
 
-真实 WASI Random 0.2.0 → 0.2.1 双向比较已为 COMPATIBLE；WASI CLI 对应版本仍因资源与依赖版本映射为 UNKNOWN。详见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
+真实 WASI Random 0.2.0 → 0.2.1 双向比较为 COMPATIBLE；WASI CLI 在声明五个依赖版本映射后双向为 COMPATIBLE，未声明映射时仍为 UNKNOWN。详见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
 
 ## 准备环境（Windows / D 盘）
 
@@ -50,7 +51,11 @@ node .\witprobe.mjs compare --old .\fixtures\vertical\base --new .\fixtures\vert
 node .\witprobe.mjs compare --old OLD_WIT --new NEW_WIT --world WORLD --detail full --out D:\VAPP\reports\full.json
 ```
 
-输出文件必须是尚不存在的 D 盘路径。程序库 compare() 继续返回完整报告。公开报告 Schema 2；IR/基线元数据 Schema 1；规则集 value-sync-v2。
+输出文件必须是尚不存在的 D 盘路径。程序库 compare() 继续返回完整报告。公开报告 Schema 2；IR/基线元数据 Schema 1；规则集 resource-sync-v3。
+
+## 资源与版本映射
+
+参见 [RESOURCE_MAPPING.md](RESOURCE_MAPPING.md)。Compare/Regression 使用 --dependency-map JSON_FILE；本地门禁使用 -DependencyMap。映射假设写入 JSON/Markdown，完整报告保留原始 IR 与比较投影。
 
 ## 基线、演示与验证
 
@@ -59,9 +64,9 @@ node .\witprobe.mjs compare --old OLD_WIT --new NEW_WIT --world WORLD --detail f
 .\run-validation.ps1
 ```
 
-基线保存源快照、源摘要、契约摘要、IR、Parser/选项和规则版本。回归不改写基线。旧 scalar-sync-v1 基线经人工复核后在新目录重建，不自动覆盖或迁移。
+基线保存源快照、源摘要、契约摘要、IR、Parser/选项和规则版本。回归不改写基线。旧 scalar-sync-v1/value-sync-v2 基线经人工复核后在新目录重建，不自动覆盖或迁移。
 
-基础验证覆盖解析器、33 项分析测试、32 项产品集成、60 项类型/报告检查（含 38 组官方方向对照）及 3 项源码变异。
+基础验证覆盖解析器、40 项分析测试、32 项产品集成、60 项类型/报告检查（含 38 组官方方向对照）、66 项资源/映射检查（含 36 组官方方向对照）及 4 项源码变异。
 
 真实上游语料独立下载并校验固定提交、压缩包与文件摘要：
 
@@ -71,7 +76,7 @@ python scripts/fetch-real-corpus.py $corpusRoot
 .\run-validation.ps1 -RealCorpusPath (Join-Path $corpusRoot 'corpus')
 ```
 
-下载目录必须是新目录。真实项目检查覆盖原始版本比较、官方工具对照、基线完整性、本地门禁、报告详略一致性，以及在独立副本中注入 List/Tuple 类型破坏。注入改动不是上游发布或上游漏洞。27 项检查符合预期，不代表 CLI 的 UNKNOWN 已变为兼容。
+下载目录必须是新目录。真实项目检查覆盖原始版本比较、官方工具对照、基线完整性、本地门禁、报告详略一致性，以及在独立副本中注入 List/Tuple、资源身份、own/borrow 和方法签名破坏。注入改动不是上游发布或上游漏洞。31 项真实项目检查分别记录未映射 UNKNOWN 和显式映射 COMPATIBLE；另有 9 项真实资源破坏检查（含 8 组官方对照）。
 
 真实门禁使用 scripts/ci-gate.ps1，原样传递退出码。demo 中预期的不兼容视为演示成功，不可用作发布门禁。
 

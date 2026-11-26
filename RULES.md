@@ -1,6 +1,6 @@
 # 当前规则与报告协议
 
-版本 0.2.0；规则集 **value-sync-v2**；公开报告 Schema **2**；IR/基线元数据 Schema **1**。
+版本 0.3.0；规则集 **resource-sync-v3**；公开报告 Schema **2**；IR/基线元数据 Schema **1**。
 
 ## 值类型
 
@@ -8,7 +8,7 @@
 
 已匹配位置要求已支持类型的结构完全相等。成员增删、改名、重排与嵌套类型变化判 TYPE_CHANGED / BREAKING。固定官方工具的 38 组方向对照覆盖这些变化；不尝试宽松数据转换。
 
-容器任意子类型若含资源、异步、外部身份或达到深度保护，整体仍带对应 UNKNOWN 原因。相同形状和相同摘要不能消除未知。FixedLengthList、Map 等额外构造尚未纳入已证明规则。
+同步资源及句柄按名义身份和 own/borrow 检查。任意子类型若含异步、外部身份或达到深度保护，整体仍带对应 UNKNOWN 原因。相同形状和相同摘要不能消除未知。FixedLengthList、Map 等额外构造尚未纳入已证明规则。
 
 ## 判定与身份
 
@@ -18,7 +18,7 @@ provider-upgrade：actual=new，expected=old；consumer-upgrade：actual=old，e
 
 结果优先级为 ERROR → BREAKING → UNKNOWN → COMPATIBLE，退出码为 2/1/3/0。明确破坏与未知同时存在时保留两者并返回 BREAKING。
 
-根包 namespace/name 相同才显式映射根版本，同时保留原版本。依赖版本不会自动擦除，同名不同版本为 UNMAPPED_DEPENDENCY_VERSION / UNKNOWN。参考工具接受版本变化不代表 WITProbe 已证明资源与依赖身份的兼容。
+根包 namespace/name 相同才显式映射根版本，同时保留原版本。依赖版本不会自动擦除，未显式映射的同名不同版本为 UNMAPPED_DEPENDENCY_VERSION / UNKNOWN。严格一对一映射与原始 IR 保留方式见 RESOURCE_MAPPING.md。参考工具接受版本变化不代表 WITProbe 已证明资源与依赖身份的兼容。
 
 | 分类 | rule_id | 含义 |
 |---|---|---|
@@ -26,7 +26,7 @@ provider-upgrade：actual=new，expected=old；consumer-upgrade：actual=old，e
 | BREAKING | TYPE_CHANGED | 已支持值类型结构不同 |
 | BREAKING | PARAMETER_COUNT_CHANGED / RESULT_PRESENCE_CHANGED / WORLD_ITEM_KIND_CHANGED | 参数数量、结果存在性或 World 项种类不同 |
 | UNKNOWN | PARAMETER_NAME_CHANGED | 单独参数改名未纳入已证明规则 |
-| UNKNOWN | UNSUPPORTED_RESOURCE / UNSUPPORTED_RESOURCE_OR_ACCESSOR | 资源、句柄、方法、访问器未验收 |
+| UNKNOWN | UNSUPPORTED_RESOURCE / UNSUPPORTED_RESOURCE_OR_ACCESSOR | 仅访问器提案或未能稳定定位的名义身份未验收；同步资源、句柄和方法已支持 |
 | UNKNOWN | UNSUPPORTED_ASYNC | Async、Future、Stream、ErrorContext 未验收 |
 | UNKNOWN | UNSUPPORTED_COMPOSITE | 其他未支持的容器构造 |
 | UNKNOWN | UNMAPPED_DEPENDENCY_VERSION / UNSUPPORTED_EXTERNAL_ID | 缺少身份映射证明 |
@@ -45,6 +45,8 @@ Host 的参数、I/O、工具和基线损坏/漂移错误同样不属于 UNKNOWN
 
 ## 基线迁移
 
-旧 scalar-sync-v1 基线保持原样，回归报 BASELINE_RULE_VERSION_CHANGED / 2。经人工复核源快照与新规则后，在新路径创建 value-sync-v2 基线；不得静默改写预期。
+旧 scalar-sync-v1/value-sync-v2 基线保持原样，回归报 BASELINE_RULE_VERSION_CHANGED / 2。经人工复核源快照与新规则后，在新路径创建 resource-sync-v3 基线；不得静默改写预期。
 
 semantic_hash 仅表示当前 IR 投影，不能替代兼容判断。解析器测试、业务组件运行、Native 和远程 CI 各自独立记录。
+
+资源名义身份、own/borrow、构造器/方法/静态种类、签名及共享别名关系均参与检查；FUNCTION_KIND_CHANGED 表示函数种类或资源归属改变。UNRESOLVED_RESOURCE_IDENTITY 保守阻止未知身份。DEPENDENCY_MAPPING_ERROR 为配置错误 / 2。

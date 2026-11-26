@@ -36,10 +36,16 @@ try {
   & node scripts/test-value-types.mjs "$out\value-types" *> "$out\value-types-run.txt"
   if ($LASTEXITCODE -ne 0) { throw 'Value-type/reference/report tests failed.' }
   $summary.stages.Add(@{stage='value-types';status='PASS'})
+  & node scripts/test-resources.mjs "$out\resources" *> "$out\resources-run.txt"
+  if ($LASTEXITCODE -ne 0) { throw 'Resource/ownership/mapping checks failed.' }
+  $summary.stages.Add(@{stage='resources';status='PASS'})
   if ($RealCorpusPath) {
     & node scripts/test-real-projects.mjs $RealCorpusPath "$out\real-projects" *> "$out\real-projects-run.txt"
     if ($LASTEXITCODE -ne 0) { throw 'Real-project checks failed.' }
     $summary.stages.Add(@{stage='real-projects';status='PASS'})
+    & node scripts/test-real-resources.mjs $RealCorpusPath "$out\real-resources" *> "$out\real-resources-run.txt"
+    if ($LASTEXITCODE -ne 0) { throw 'Real WASI CLI resource break checks failed.' }
+    $summary.stages.Add(@{stage='real-resources';status='PASS'})
   } else { $summary.stages.Add(@{stage='real-projects';status='SKIPPED';reason='Supply -RealCorpusPath after fetching the pinned external corpus.'}) }
   if (!$SkipMutations) {
     & node scripts/test-mutations.mjs "$out\mutations" *> "$out\mutations-run.txt"

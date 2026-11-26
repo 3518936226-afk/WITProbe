@@ -11,13 +11,15 @@ const pin = JSON.parse(fs.readFileSync(path.join(root, 'toolchain.lock.json'), '
 const toolchain = resolveToolchain(root, pin);
 const backend = path.join(root, '_build/js/release/build/local/witprobe/cli/cli.js');
 let ready = false;
-const help = `WITProbe synchronous value-type prototype (MoonBit analysis, Node.js host)
+const help = `WITProbe synchronous value/resource contract prototype (MoonBit analysis, Node.js host)
   node witprobe.mjs compare --old PATH --new PATH --world NAME
        [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--detail summary|full] [--out NEW_D_PATH]
   node witprobe.mjs baseline create --wit PATH --world NAME --out NEW_D_DIRECTORY
   node witprobe.mjs regression run --baseline PATH --new PATH [--new-world NAME]
        [--direction provider-upgrade|consumer-upgrade] [--format json|markdown] [--detail summary|full] [--out NEW_D_PATH]
 Use --old-world/--new-world instead of --world when names differ.
+Compare/regression accept --dependency-map JSON_FILE for explicit one-to-one old/new package version pairs.
+Mappings align identities only; resource and function structures are still checked. No implicit version erasure.
 Both comparisons use provider-world contracts; consumer-upgrade is the new caller's expectation.
 Exit: 0 compatible/operation completed, 1 breaking, 2 input/tool/configuration error, 3 unknown.
 No baseline is modified by regression. Output paths must be on D: in this workspace.
@@ -68,16 +70,19 @@ function ensureBuild() {
   ready = true;
 }
 
-export function compare(oldPath, newPath, oldWorld, newWorld, direction = 'provider-upgrade') {
+export function compare(oldPath, newPath, oldWorld, newWorld, direction = 'provider-upgrade', dependencyMap = {schema_version:1,packages:[]}) {
   if (!['provider-upgrade', 'consumer-upgrade'].includes(direction)) fail('INVALID_DIRECTION', 'Choose provider-upgrade or consumer-upgrade.');
   if (!oldWorld || !newWorld) fail('WORLD_REQUIRED', 'Specify --world or both --old-world and --new-world.');
   ensureBuild();
-  const report = JSON.parse(run(process.execPath, [backend, path.resolve(oldPath), path.resolve(newPath), oldWorld, newWorld, direction]));
+  const mappingText = typeof dependencyMap === 'string' ? dependencyMap : JSON.stringify(dependencyMap);
+  if (Buffer.byteLength(mappingText) > 65536) fail('DEPENDENCY_MAPPING_ERROR','Dependency mapping exceeds 64 KiB.');
+  const report = JSON.parse(run(process.execPath, [backend, path.resolve(oldPath), path.resolve(newPath), oldWorld, newWorld, direction, mappingText]));
   const expectedCodes = { COMPATIBLE: 0, BREAKING: 1, ERROR: 2, UNKNOWN: 3 };
   if (expectedCodes[report.status] !== report.exit_code) fail('INVALID_BACKEND_REPORT', 'Backend status and exit code disagree.');
   report.parser = { module: pin.wit.module, version: pin.wit.version, commit: pin.wit.commit };
   report.parse_options = { features: [], all_features: false, target_version: null };
   if (report.status !== 'ERROR') {
+    report.mapping_sha256 = hash(report.dependency_mappings);
     report.identity_mapping = { root_package: report.old_contract.root_identity,
       old_version: report.old_contract.source_version ?? null, new_version: report.new_contract.source_version ?? null };
     report.old_semantic_hash = hash(report.old_semantic_contract);
@@ -158,7 +163,7 @@ export function createBaseline(input, world, output) {
     source_hash: meta.source_hash, semantic_hash: meta.semantic_hash, rule_set_version: meta.rule_set_version };
 }
 
-export function regression(baseline, input, newWorld, direction = 'provider-upgrade') {
+export function regression(baseline, input, newWorld, direction = 'provider-upgrade', dependencyMap = {schema_version:1,packages:[]}) {
   const directory = path.resolve(baseline), meta = readJson(path.join(directory, 'baseline.json'));
   if (meta.schema_version !== 1 || meta.ir_schema_version !== 1 || meta.analysis_scope !== 'structural') fail('BASELINE_SCHEMA', 'Baseline schema/scope is unsupported.');
   if (JSON.stringify(canonical(meta.parser)) !== JSON.stringify(canonical({ module: pin.wit.module, version: pin.wit.version, commit: pin.wit.commit }))) fail('BASELINE_PARSER_CHANGED', 'Parser changed; baseline migration requires explicit review.');
@@ -167,7 +172,7 @@ export function regression(baseline, input, newWorld, direction = 'provider-upgr
   const snapshot = path.join(directory, 'source', meta.entry), current = sources(snapshot);
   if (current.source_hash !== meta.source_hash || hash(current.manifest) !== hash(meta.source_manifest)) fail('BASELINE_SOURCE_MODIFIED', 'Baseline source bytes or filenames changed.');
   if (hash(readJson(path.join(directory, 'contract.json'))) !== meta.contract_hash) fail('BASELINE_IR_MODIFIED', 'Baseline IR changed.');
-  const report = compare(snapshot, input, meta.world, newWorld || meta.world, direction);
+  const report = compare(snapshot, input, meta.world, newWorld || meta.world, direction, dependencyMap);
   if (report.status === 'ERROR') return report;
   if (report.rule_set_version !== meta.rule_set_version) fail('BASELINE_RULE_VERSION_CHANGED', 'Rules changed; recomputing the baseline requires explicit review.');
   if (report.old_semantic_hash !== meta.semantic_hash) fail('BASELINE_SEMANTICS_CHANGED', 'Reparsed baseline differs from its recorded semantic contract.');
@@ -197,7 +202,7 @@ function emit(report, options) {
     // Presentation only: the MoonBit report owns every decision and count.
     view = { ...report, detail: full ? 'full' : 'summary' };
     if (!full) {
-      for (const key of ['old_contract','new_contract','old_semantic_contract','new_semantic_contract','summary_markdown']) delete view[key];
+      for (const key of ['old_contract','new_contract','comparison_new_contract','old_semantic_contract','new_semantic_contract','summary_markdown']) delete view[key];
       view.findings = report.findings.slice(0, 20);
       view.changes = report.changes.slice(0, 20).map(({ kind, symbol }) => ({ kind, symbol }));
       view.findings_truncated = report.findings.length > view.findings.length;
@@ -221,15 +226,15 @@ function main(argv) {
   if (!argv.length || argv[0] === '--help') { process.stdout.write(help); return; }
   let options, report;
   if (argv[0] === 'compare') {
-    options = parseOptions(argv.slice(1), ['old','new','world','old-world','new-world','direction','format','detail','out']);
-    report = compare(required(options, 'old'), required(options, 'new'), options['old-world'] || options.world, options['new-world'] || options.world, options.direction);
+    options = parseOptions(argv.slice(1), ['old','new','world','old-world','new-world','direction','format','detail','dependency-map','out']);
+    report = compare(required(options, 'old'), required(options, 'new'), options['old-world'] || options.world, options['new-world'] || options.world, options.direction, options['dependency-map'] ? fs.readFileSync(options['dependency-map'],'utf8').replace(/^\uFEFF/,'') : undefined);
   } else if (argv[0] === 'baseline' && argv[1] === 'create') {
     options = parseOptions(argv.slice(2), ['wit','world','out']);
     report = createBaseline(required(options, 'wit'), required(options, 'world'), required(options, 'out'));
     options = {};
   } else if (argv[0] === 'regression' && argv[1] === 'run') {
-    options = parseOptions(argv.slice(2), ['baseline','new','new-world','direction','format','detail','out']);
-    report = regression(required(options, 'baseline'), required(options, 'new'), options['new-world'], options.direction);
+    options = parseOptions(argv.slice(2), ['baseline','new','new-world','direction','format','detail','dependency-map','out']);
+    report = regression(required(options, 'baseline'), required(options, 'new'), options['new-world'], options.direction, options['dependency-map'] ? fs.readFileSync(options['dependency-map'],'utf8').replace(/^\uFEFF/,'') : undefined);
   } else fail('ARGUMENT_ERROR', 'Unknown command; use --help.');
   emit(report, options);
 }

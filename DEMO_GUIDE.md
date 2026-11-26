@@ -1,4 +1,4 @@
-# WITProbe 0.2.0 本地演示与复现
+# WITProbe 0.3.0 本地演示与复现
 
 当前示例全部位于 D 盘，不需要安装新依赖或修改系统配置。需使用锁文件对应的现有 MoonBit、Node、Git 与参考工具；Native 不属于本次演示范围。
 
@@ -16,7 +16,7 @@ Set-Location 'D:\VAPP\WITProbe'
 | 新增 subtract，Provider Upgrade | COMPATIBLE | 0 |
 | 同一新增，Consumer Upgrade | BREAKING | 1 |
 | add 的参数和结果改成 string | BREAKING | 1 |
-| 新增含资源字段、未被函数使用的公开 Record | UNKNOWN，带公开类型路径 | 3 |
+| 新增含 Future 字段、未被函数使用的公开 Record | UNKNOWN，带公开类型路径 | 3 |
 | 只修改注释后执行基线回归 | COMPATIBLE；源摘要变化，契约摘要不变 | 0 |
 
 ## 手工比较
@@ -55,8 +55,8 @@ $LASTEXITCODE
 
 该脚本执行上游/接入检查、分析测试、产品集成、官方有限对照及 3 种源码变异。每次保存独立目录，索引见 `evidence/latest-product-run.json`。变异的独立源码副本及预期失败日志全部保留，没有删除原工程文件。
 
-默认 JSON/Markdown 为精简汇总；使用 `--detail full` 保存完整明细和 IR。基础值类型 Record 不再因为类型种类而返回 UNKNOWN，演示中的 Record 明确含有尚未支持的资源字段。
+默认 JSON/Markdown 为精简汇总；使用 `--detail full` 保存完整明细和 IR。基础值类型 Record 不再因为类型种类而返回 UNKNOWN，演示中的 Record 明确含有尚未支持的 Future 字段。
 
-旧 scalar-sync-v1 基线不可静默复用；人工复核后，在新目录创建 value-sync-v2 基线。真实语料的获取与完整测试命令见 README。
+旧 scalar-sync-v1 基线不可静默复用；人工复核后，在新目录创建 resource-sync-v3 基线。真实语料的获取与完整测试命令见 README。
 
 远程 CI 尚未配置或运行。本地门禁检查使用真实子进程退出码，记录于演示汇总；它不代表已在 GitHub Actions 运行成功。
