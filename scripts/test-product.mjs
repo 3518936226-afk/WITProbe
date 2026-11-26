@@ -43,10 +43,10 @@ test('type change finds exact parameters and result', () => {
   const r = compare(fixture('base'), fixture('breaking'), world, world);
   assert.equal(r.exit_code, 1); assert.equal(r.findings.filter(f => f.rule_id === 'TYPE_CHANGED').length, 3);
 });
-test('public unused record produces unknown reason and action', () => {
+test('public unused record containing a resource produces unknown reason and action', () => {
   const r = compare(fixture('base'), fixture('unknown'), world, world);
   assert.equal(r.status, 'UNKNOWN'); assert.equal(r.exit_code, 3);
-  assert(r.findings.some(f => f.symbol.includes('/type/future-item') && f.rule_id === 'UNSUPPORTED_COMPOSITE' && f.action));
+  assert(r.findings.some(f => f.symbol.includes('/type/future-item') && f.rule_id === 'UNSUPPORTED_RESOURCE' && f.action));
 });
 for (const [name, newPath, code, status] of [
   ['compatible', fixture('base'), 0, 'COMPATIBLE'], ['breaking', fixture('breaking'), 1, 'BREAKING'],
@@ -79,7 +79,7 @@ test('baseline creation records source, semantic and rule identities', () => {
   assert.equal(r.status, 'BASELINE_CREATED');
   const meta = JSON.parse(fs.readFileSync(path.join(baseline,'baseline.json')));
   assert.match(meta.source_hash, /^[a-f0-9]{64}$/); assert.match(meta.semantic_hash, /^[a-f0-9]{64}$/);
-  assert.equal(meta.rule_set_version, 'scalar-sync-v1'); assert.equal(meta.ir_schema_version, 1);
+  assert.equal(meta.rule_set_version, 'value-sync-v2'); assert.equal(meta.ir_schema_version, 1);
 });
 test('baseline overwrite is refused', () => assert.throws(() => createBaseline(fixture('base'), world, baseline), e => e.code === 'BASELINE_EXISTS'));
 test('regression leaves every baseline file unchanged', () => {
