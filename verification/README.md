@@ -1,4 +1,6 @@
-# Recorded local verification
+# Recorded verification
+
+**Remote clean-checkout acceptance:** [GitHub Actions report](ci/REPORT.md), [machine-readable receipt](ci/github-actions-success.json). Older directories retain their original local-only claims.
 
 **Current version: 0.3.0.** See [resource and mapping verification](v0.3.0/REPORT.md). The following v0.2.0 links are historical records. See [v0.2.0/REPORT.md](v0.2.0/REPORT.md), [versioned results](v0.2.0/results.json) and [the current status](../CURRENT_STATUS.md). Files directly in this directory are historical scalar-sync-v1 records and demo outputs; they have not been rewritten to look like v2 results.
 
