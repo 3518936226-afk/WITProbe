@@ -51,6 +51,15 @@ pub(all) struct Finding {
 }
 
 #derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct FindingGroup {
+  status : String
+  rule_id : String
+  count : Int32
+  sample_symbols : Array[String]
+  action : String
+}
+
+#derive(Eq, @debug.Debug, @json.ToJson)
 pub(all) struct Function {
   name : String
   kind : String
@@ -89,6 +98,18 @@ pub(all) struct Report {
 }
 pub fn Report::json(Self) -> @json.Json
 pub fn Report::markdown(Self) -> String
+pub fn Report::summary(Self) -> ReportSummary
+pub fn Report::summary_markdown(Self) -> String
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct ReportSummary {
+  finding_count : Int32
+  breaking_count : Int32
+  unknown_count : Int32
+  error_count : Int32
+  change_count : Int32
+  groups : Array[FindingGroup]
+}
 
 #derive(Eq, @debug.Debug, @json.ToJson)
 pub(all) struct TypeDesc {

@@ -13,7 +13,7 @@ fn finding(
     action: if status == "UNKNOWN" {
       match rule {
         "UNSUPPORTED_RESOURCE" | "UNSUPPORTED_RESOURCE_OR_ACCESSOR" =>
-          "Review nominal resource identity, ownership and lifecycle; these are not covered by the scalar rules."
+          "Review nominal resource identity, ownership and lifecycle; these are not covered by the value-type rules."
         "UNSUPPORTED_ASYNC" =>
           "Review async ABI and payload semantics with the intended runtime before extending the rule set."
         "UNMAPPED_DEPENDENCY_VERSION" =>
@@ -210,7 +210,7 @@ fn scan_unknown(
             "UNKNOWN",
             code,
             p + "/type/" + t.name,
-            "Public type is outside the scalar/alias rules, regardless of function usage.",
+            "Public type contains an unsupported type, regardless of function usage.",
           ),
         )
       }
@@ -395,7 +395,14 @@ pub fn compare(old : Contract, new : Contract, direction : String) -> Report {
     diff_edges(old.imports, new.imports, "import", changes)
     diff_edges(old.exports, new.exports, "export", changes)
   }
-  findings.sort_by_key(fn(f) { f.symbol + ":" + f.rule_id })
+  findings.sort_by_key(fn(f) {
+    let rank = match f.status {
+      "ERROR" => "0"
+      "BREAKING" => "1"
+      _ => "2"
+    }
+    rank + ":" + f.symbol + ":" + f.rule_id
+  })
   changes.sort_by_key(fn(c) { c.symbol + ":" + c.kind })
   let status = if findings.any(fn(f) { f.status == "ERROR" }) {
     "ERROR"
@@ -407,8 +414,8 @@ pub fn compare(old : Contract, new : Contract, direction : String) -> Report {
     "COMPATIBLE"
   }
   {
-    schema_version: 1,
-    rule_set_version: "scalar-sync-v1",
+    schema_version: 2,
+    rule_set_version: "value-sync-v2",
     analysis_scope: "structural",
     direction,
     actual_side: if provider {
