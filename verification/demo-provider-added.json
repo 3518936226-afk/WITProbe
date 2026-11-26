@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "rule_set_version": "scalar-sync-v1",
+  "analysis_scope": "structural",
+  "direction": "provider-upgrade",
+  "actual_side": "new",
+  "expected_side": "old",
+  "status": "COMPATIBLE",
+  "exit_code": 0,
+  "old_contract": {
+    "schema_version": 1,
+    "root_identity": "demo:closed-loop",
+    "source_version": "1.0.0",
+    "world": "calculator-world",
+    "imports": [],
+    "exports": [
+      {
+        "key": "interface:demo:closed-loop/calculator",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "add",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          }
+        ],
+        "types": []
+      }
+    ]
+  },
+  "new_contract": {
+    "schema_version": 1,
+    "root_identity": "demo:closed-loop",
+    "source_version": "1.0.0",
+    "world": "calculator-world",
+    "imports": [],
+    "exports": [
+      {
+        "key": "interface:demo:closed-loop/calculator",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "add",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          },
+          {
+            "name": "subtract",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          }
+        ],
+        "types": []
+      }
+    ]
+  },
+  "changes": [
+    {
+      "kind": "MODIFIED",
+      "symbol": "export/interface:demo:closed-loop/calculator",
+      "old_definition": "{\"key\":\"interface:demo:closed-loop/calculator\",\"kind\":\"interface\",\"functions\":[{\"name\":\"add\",\"kind\":\"freestanding\",\"params\":[{\"name\":\"a\",\"ty\":{\"shape\":\"u32\"}},{\"name\":\"b\",\"ty\":{\"shape\":\"u32\"}}],\"result\":{\"shape\":\"u32\"}}],\"types\":[]}",
+      "new_definition": "{\"key\":\"interface:demo:closed-loop/calculator\",\"kind\":\"interface\",\"functions\":[{\"name\":\"add\",\"kind\":\"freestanding\",\"params\":[{\"name\":\"a\",\"ty\":{\"shape\":\"u32\"}},{\"name\":\"b\",\"ty\":{\"shape\":\"u32\"}}],\"result\":{\"shape\":\"u32\"}},{\"name\":\"subtract\",\"kind\":\"freestanding\",\"params\":[{\"name\":\"a\",\"ty\":{\"shape\":\"u32\"}},{\"name\":\"b\",\"ty\":{\"shape\":\"u32\"}}],\"result\":{\"shape\":\"u32\"}}],\"types\":[]}"
+    },
+    {
+      "kind": "FUNCTION_ADDED",
+      "symbol": "export/interface:demo:closed-loop/calculator/function/subtract",
+      "new_definition": "{\"name\":\"subtract\",\"kind\":\"freestanding\",\"params\":[{\"name\":\"a\",\"ty\":{\"shape\":\"u32\"}},{\"name\":\"b\",\"ty\":{\"shape\":\"u32\"}}],\"result\":{\"shape\":\"u32\"}}"
+    }
+  ],
+  "findings": [],
+  "old_semantic_contract": {
+    "schema_version": 1,
+    "root_identity": "demo:closed-loop",
+    "world": "calculator-world",
+    "imports": [],
+    "exports": [
+      {
+        "key": "interface:demo:closed-loop/calculator",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "add",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          }
+        ],
+        "types": []
+      }
+    ]
+  },
+  "new_semantic_contract": {
+    "schema_version": 1,
+    "root_identity": "demo:closed-loop",
+    "world": "calculator-world",
+    "imports": [],
+    "exports": [
+      {
+        "key": "interface:demo:closed-loop/calculator",
+        "kind": "interface",
+        "functions": [
+          {
+            "name": "add",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          },
+          {
+            "name": "subtract",
+            "kind": "freestanding",
+            "params": [
+              {
+                "name": "a",
+                "ty": {
+                  "shape": "u32"
+                }
+              },
+              {
+                "name": "b",
+                "ty": {
+                  "shape": "u32"
+                }
+              }
+            ],
+            "result": {
+              "shape": "u32"
+            }
+          }
+        ],
+        "types": []
+      }
+    ]
+  },
+  "markdown": "# WITProbe compatibility report\n\nStatus: COMPATIBLE\nDirection: provider-upgrade\nActual provider: new\nExpected contract/environment: old\nScope: structural; root package versions are mapped explicitly; this is not a runtime linking proof.\nRules: scalar-sync-v1\n\n## Findings\n\nAll obligations in the supported scalar/synchronous scope are satisfied.\n\n## Changes\n\n- MODIFIED at export/interface:demo:closed-loop/calculator\n- FUNCTION_ADDED at export/interface:demo:closed-loop/calculator/function/subtract\n",
+  "parser": {
+    "module": "mizchi/wit",
+    "version": "0.4.1",
+    "commit": "df59b4068926667eab2302a4daabecefad4c28ec"
+  },
+  "parse_options": {
+    "features": [],
+    "all_features": false,
+    "target_version": null
+  },
+  "identity_mapping": {
+    "root_package": "demo:closed-loop",
+    "old_version": "1.0.0",
+    "new_version": "1.0.0"
+  },
+  "old_semantic_hash": "f68544b7a2a3fc026b08d50df5ad718925b32e3c41ba87222bda94d4acc036df",
+  "new_semantic_hash": "212228b0ce140ed929ff7c3c4d8d0a76c1062b3fe1bc41fece5aba206c6701d7",
+  "baseline_changes": {
+    "source_changed": true,
+    "contract_changed": true,
+    "rule_changed": false
+  },
+  "baseline": {
+    "source_hash": "9580138cc61d0e3f041d9b7a596b507bdbce098a701ab771b993ebb9184d7a76",
+    "semantic_hash": "f68544b7a2a3fc026b08d50df5ad718925b32e3c41ba87222bda94d4acc036df",
+    "rule_set_version": "scalar-sync-v1"
+  }
+}

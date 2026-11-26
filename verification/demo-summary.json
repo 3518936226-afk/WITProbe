@@ -1,0 +1,43 @@
+{
+  "cases": [
+    {
+      "case": "provider-added",
+      "status": "COMPATIBLE",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "expected_status": "COMPATIBLE"
+    },
+    {
+      "case": "consumer-added",
+      "status": "BREAKING",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "expected_status": "BREAKING"
+    },
+    {
+      "case": "signature-breaking",
+      "status": "BREAKING",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "expected_status": "BREAKING"
+    },
+    {
+      "case": "public-unused-record",
+      "status": "UNKNOWN",
+      "exit_code": 3,
+      "expected_exit": 3,
+      "expected_status": "UNKNOWN"
+    },
+    {
+      "case": "comment-only",
+      "status": "COMPATIBLE",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "expected_status": "COMPATIBLE"
+    }
+  ],
+  "status": "PASS",
+  "local_ci_gate": "BLOCKED_AS_EXPECTED",
+  "remote_ci": "NOT_RUN",
+  "baseline": "<workspace>\\evidence\\demos\\20261126T101121005Z-e165aa5f\\baseline"
+}

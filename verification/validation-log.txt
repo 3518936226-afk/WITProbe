@@ -1,0 +1,68 @@
+=== analysis-tests.txt ===
+Total tests: 25, passed: 25, failed: 0.
+
+=== parser/integration-tests-js.txt ===
+Total tests: 13, passed: 13, failed: 0.
+
+=== parser/upstream-tests-js.txt ===
+Total tests: 113, passed: 113, failed: 0.
+
+=== mutations/reverse-direction/stdout.txt ===
+[local/witprobe] test analyzer/analysis_test.mbt:14 ("adding export has opposite direction verdicts") failed: src/analyzer/analysis_test.mbt:17:3-17:68@local/witprobe FAILED: `"BREAKING" != "COMPATIBLE"`
+diff:
+-"BREAKING" +"COMPATIBLE"
+[local/witprobe] test analyzer/analysis_test.mbt:22 ("removing export has opposite direction verdicts") failed: src/analyzer/analysis_test.mbt:25:3-25:66@local/witprobe FAILED: `"COMPATIBLE" != "BREAKING"`
+diff:
+-"COMPATIBLE" +"BREAKING"
+[local/witprobe] test analyzer/analysis_test.mbt:30 ("adding import has opposite direction verdicts") failed: src/analyzer/analysis_test.mbt:33:3-33:66@local/witprobe FAILED: `"COMPATIBLE" != "BREAKING"`
+diff:
+-"COMPATIBLE" +"BREAKING"
+[local/witprobe] test analyzer/analysis_test.mbt:38 ("removing import has opposite direction verdicts") failed: src/analyzer/analysis_test.mbt:41:3-41:68@local/witprobe FAILED: `"BREAKING" != "COMPATIBLE"`
+diff:
+-"BREAKING" +"COMPATIBLE"
+[local/witprobe] test analyzer/analysis_test.mbt:93 ("public unused scalar type removal is breaking") failed: src/analyzer/analysis_test.mbt:97:3-97:34@local/witprobe FAILED: `"COMPATIBLE" != "BREAKING"`
+diff:
+-"COMPATIBLE" +"BREAKING"
+[local/witprobe] test analyzer/analysis_test.mbt:154 ("breaking wins but unknown findings are retained") failed: src/analyzer/analysis_test.mbt:158:3-158:34@local/witprobe FAILED: `"UNKNOWN" != "BREAKING"`
+diff:
+-"UNKNOWN" +"BREAKING"
+[local/witprobe] test analyzer/analysis_test.mbt:190 ("report human and machine conclusion share one source") failed: src/analyzer/analysis_test.mbt:193:3-193:57@local/witprobe FAILED: `false` is not true
+[local/witprobe] test analyzer/analysis_test.mbt:209 ("interface imported function additions reverse the export rule") failed: src/analyzer/analysis_test.mbt:213:3-213:34@local/witprobe FAILED: `"COMPATIBLE" != "BREAKING"`
+diff:
+-"COMPATIBLE" +"BREAKING"
+Total tests: 25, passed: 17, failed: 8.
+
+=== mutations/reverse-direction/stderr.txt ===
+
+=== mutations/ignore-scalar-change/stdout.txt ===
+[local/witprobe] test analyzer/analysis_test.mbt:46 ("scalar parameter change is breaking both ways") failed: src/analyzer/analysis_test.mbt:51:5-51:30@local/witprobe FAILED: `0 != 1`
+diff:
+-0 +1
+[local/witprobe] test analyzer/analysis_test.mbt:57 ("scalar result change and result removal are breaking") failed: src/analyzer/analysis_test.mbt:59:3-62:4@local/witprobe FAILED: `"COMPATIBLE" != "BREAKING"`
+diff:
+-"COMPATIBLE" +"BREAKING"
+[local/witprobe] test analyzer/analysis_test.mbt:147 ("parameter order is preserved and changes remain visible") failed: src/analyzer/analysis_test.mbt:150:3-150:66@local/witprobe FAILED: `"UNKNOWN" != "BREAKING"`
+diff:
+-"UNKNOWN" +"BREAKING"
+Total tests: 25, passed: 22, failed: 3.
+
+=== mutations/swallow-unknown/stdout.txt ===
+[local/witprobe] test analyzer/analysis_test.mbt:82 ("parameter name only is unknown") failed: src/analyzer/analysis_test.mbt:88:3-88:33@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+[local/witprobe] test analyzer/analysis_test.mbt:102 ("public unused record stays unknown even without function use") failed: src/analyzer/analysis_test.mbt:105:3-105:33@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+[local/witprobe] test analyzer/analysis_test.mbt:110 ("public resource gives actionable code") failed: src/analyzer/analysis_test.mbt:113:3-113:33@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+[local/witprobe] test analyzer/analysis_test.mbt:122 ("async function never receives compatible by omission") failed: src/analyzer/analysis_test.mbt:124:3-124:65@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+[local/witprobe] test analyzer/analysis_test.mbt:223 ("dependency version mismatch is unknown rather than missing export") failed: src/analyzer/analysis_test.mbt:227:3-227:33@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+[local/witprobe] test analyzer/analysis_test.mbt:245 ("unsupported record member ordering is retained") failed: src/analyzer/analysis_test.mbt:249:3-249:33@local/witprobe FAILED: `"COMPATIBLE" != "UNKNOWN"`
+diff:
+-"COMPATIBLE" +"UNKNOWN"
+Total tests: 25, passed: 19, failed: 6.
