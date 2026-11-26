@@ -11,9 +11,13 @@
 - 已支持值类型要求相同结构，保留成员名、顺序、数量、分支有无与嵌套类型。
 - 同步资源声明、own/borrow、构造器、方法和静态函数可检查；别名保留原始名义身份。
 - 依赖版本支持经校验的显式一对一映射；异步、访问器提案、外部身份与未映射版本仍保守处理。
-- Native、业务组件 ABI/运行时、完整 WIT 子类型及远程 GitHub Actions 尚未验收。
+- Windows GitHub Actions 已完成干净环境验证；Native、业务组件 ABI/运行时与完整 WIT 子类型仍未验收。
 
 真实 WASI Random 0.2.0 → 0.2.1 双向比较为 COMPATIBLE；WASI CLI 在声明五个依赖版本映射后双向为 COMPATIBLE，未声明映射时仍为 UNKNOWN。详见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
+
+## 干净环境与 GitHub Actions
+
+完整步骤见 [REPRODUCING.md](REPRODUCING.md)。新克隆可先运行 scripts/bootstrap-ci.ps1 自动下载并校验 MoonBit、Node 和 Python，再执行 prepare 与完整测试。Actions 使用同一入口，包含真实 WASI、全部官方对照、4 个变异、演示与门禁，并检查测试后源码不变。
 
 ## 准备环境（Windows / D 盘）
 

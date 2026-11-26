@@ -1,5 +1,7 @@
 # WITProbe 0.3.0 verification status
 
+**GitHub Actions clean-checkout validation is now verified.** [Successful run #2](https://github.com/3518936226-afk/WITProbe/actions/runs/45859517167), tested commit 8333b40edad47cd01dde80f0f5c591c0d535ab0b; [CI receipt](verification/ci/github-actions-success.json), [reproduction](REPRODUCING.md). The following resource results remain recorded separately.
+
 Recorded 2026-11-27. Rules: resource-sync-v3; Report Schema 2; IR/baseline metadata Schema 1.
 
 | Suite | Result |
@@ -33,4 +35,4 @@ WASI Random and previous List/Tuple break experiments remain covered. Test injec
 
 Supported: synchronous value/resource contract structure, nominal origins and aliases, own/borrow, constructors/methods/statics, and explicit one-to-one same-package version mapping. Ambiguous/coexisting-version mappings are rejected. Async/accessor proposals, external/unresolved identities and additional container proposals remain conservative UNKNOWN.
 
-This does not execute destructors or prove runtime lifetime safety, actual resource instance identity or business behavior. Native, remote GitHub Actions and real business-component interoperability remain unverified. The existing pinned MoonBit toolchain was reused; this is not a new-machine installation test. Older plans and verification directories are historical.
+This does not execute destructors or prove runtime lifetime safety, actual resource instance identity or business behavior. Native and real business-component interoperability remain unverified; Windows GitHub Actions has now passed. The existing pinned MoonBit toolchain was reused; this is not a new-machine installation test. Older plans and verification directories are historical.
